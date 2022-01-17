@@ -9,7 +9,7 @@ const postRoute = require('./routes/habits')
 dotenv.config();
 
 // Connect to DB
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () => console.log('connected to db!')
+mongoose.connect(process.env.DB_CONNECT.toString(), { useNewUrlParser: true }, () => console.log('connected to db!')
 );
 
 // Middleware
