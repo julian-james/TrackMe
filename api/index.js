@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 //Import Routes
 const authRoute = require('./routes/auth');
@@ -9,7 +9,11 @@ const postRoute = require('./routes/habits')
 dotenv.config();
 
 // Connect to DB
-mongoose.connect(process.env.DB_CONNECT.toString(), { useNewUrlParser: true }, () => console.log('connected to db!')
+mongoose.connect(
+    // process.env.DB_CONNECT.toString(),
+    "mongodb+srv://julian:rhino11@cluster0.bdrta.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    { useNewUrlParser: true },
+    () => console.log('connected to db!')
 );
 
 // Middleware
