@@ -1,15 +1,17 @@
-const mongoose = require('mongoose');
-
-// module.exports = class User {
-//     constructor(data) {
-//         this.user_id = data.user_id,
-//         this.username = data.username,
-//         this.email = data.email,
-//         this.password = data.password
-//     }
+// module.exports = class Habit {
+//     constructor(data){
+//         this.id = data.id;
+//         this.name = data.name;
+//         this.date = data.date;
+//         this.email = data.email;
+//         this.likes1 = data.likes1;
+//         this.likes2 = data.likes2;
+//         this.likes3 = data.likes3;
+//         this.gif = data.gif
+//     };
 
 //     static get All(){
-//         const users = Data.users.map((user) => new Post(user));
+//         const posts = Data.posts.map((post) => new Post(post));
 //         return posts;
 //     };
 
@@ -32,21 +34,26 @@ const mongoose = require('mongoose');
 // };
 
 
-
-const userSchema = new mongoose.Schema({
-    name: {
+const habitSchema = new mongoose.Schema({
+    nodejs: {
         type: String,
         required: true,
         min: 6,
         max: 255
     },
-    email: {
+    React: {
+        type: String,
+        required: true,
+        min: 6,
+        max: 255
+    },
+    SQL: {
         type: String,
         required: true,
         max: 255,
         min: 6
     },
-    password: {
+    Python: {
         type: String,
         required: true,
         max: 1024,
@@ -57,5 +64,3 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     }
 });
-
-module.exports = mongoose.model('User', userSchema)
