@@ -17,3 +17,10 @@ Content-Type: application/json
     "email": "pen-r@email.com",
     "password": "rubberpen"
 }
+
+
+###
+
+GET http://localhost:3000/api/posts
+Content-Type: application/json
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWU1MzVhZjFmNTk4MjM3NWYzODVmN2EiLCJpYXQiOjE2NDI0MTY4MDZ9.5DwWdzReyZGI7_btyHMM0ksRosWLVj7jqIQMXMC0Z00
