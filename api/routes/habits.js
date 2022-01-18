@@ -28,7 +28,7 @@ router.get('/habits', async (req, res) => {
 });
 
 //CREATE ROUTE
-app.post("/habits", async (req, res) => {
+router.post("/habits", async (req, res) => {
     const habit = new User(req.body);
   
     try {
@@ -40,7 +40,7 @@ app.post("/habits", async (req, res) => {
   });
 
 //UPDATE ROUTE
-app.patch("/habits/:id", async (req, res) => {
+router.patch("/habits/:id", async (req, res) => {
     try {
       await User.findByIdAndUpdate(req.params.id, req.body);
       await User.save();
@@ -50,7 +50,7 @@ app.patch("/habits/:id", async (req, res) => {
     }
   });
 
-app.delete("/habits/:id", async (req, res) => {
+router.delete("/habits/:id", async (req, res) => {
     try {
       const habit = await User.findByIdAndDelete(req.params.id);
   
