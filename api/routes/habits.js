@@ -11,8 +11,8 @@ router.get("/:id", habitController.show)
 router.post("/", habitController.create)
 // router.patch("/:id", habitController.editHabit)
 router.patch("/:id/frequency", habitController.updateFreq)
-// router.patch("/:id/goal", habitController.updateGoal)
-// router.patch("/:id/streak", habitController.updateStreak)
+router.patch("/:id/goal", habitController.updateGoal)
+router.patch("/:id/streak", habitController.updateStreak)
 router.delete("/:id", habitController.destroy)
 
 

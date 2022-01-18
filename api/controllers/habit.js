@@ -54,6 +54,26 @@ async function updateFreq(req, res) {
         res.status(500).json({err})
     }
 }
-module.exports = {index, show, create, destroy, updateFreq}
+
+// update streak
+async function updateStreak(req, res) {
+    try {
+        const updatedStreak = await Habit.findByIdAndUpdate(req.params.id, {$inc: {Streak: 1}})
+        res.status(200).json(updatedStreak)
+    } catch (err) {
+        res.status(500).json({err})
+    }
+}
+
+// update Goal
+async function updateGoal(req, res) {
+    try {
+        const updatedGoal = await Habit.findByIdAndUpdate(req.params.id, {$set: {Goal: true}})
+        res.status(200).json(updatedGoal)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+}
+module.exports = {index, show, create, destroy, updateFreq, updateStreak, updateGoal}
 
 //  updateFreq, updateGoal, updateStreak, createHabit, editHabit, destroy
