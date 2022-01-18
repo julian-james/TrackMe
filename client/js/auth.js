@@ -35,9 +35,9 @@ async function requestLogin(e){
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
-        const r = await fetch(`http://localhost:3000/auth/login`, options)
+        const r = await fetch(`http://localhost:3000/api/user/login`, options)
         const data = await r.json()
-        if (data.err){ throw Error(data.err); }
+        if (data.err) { throw Error(data.err); }
         login(data);
     } catch (err) {
         console.warn(`Error: ${err}`);
@@ -52,7 +52,7 @@ async function requestRegistration(e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
-        const r = await fetch(`http://localhost:3000/auth/register`, options)
+        const r = await fetch(`http://localhost:3000/api/user/register`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err) }
         requestLogin(e);

@@ -1,16 +1,16 @@
 const express = require('express'); 
 const app = express(); 
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 
 const cors = require('cors');
-app.use(cors());
+app.use(cors('*'));
 
 const mongoose = require('mongoose');
 //Import Routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/habits')
 
-// dotenv.config();
+dotenv.config();
 
 // Connect to DB
 mongoose.connect(
@@ -25,7 +25,9 @@ app.use(express.json());
 
 //Route Middlewares
 app.use('/api/user', authRoute);
-app.use('/api/posts', postRoute);
+app.use('/api/habits', postRoute);
+
+app.get('/', (req, res) => res.json({ message: 'Welcome' }));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('server up and running'));
