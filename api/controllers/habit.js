@@ -74,4 +74,15 @@ async function updateGoal(req, res) {
         res.status(500).json(err)
     }
 }
-module.exports = {index, show, create, destroy, updateFreq, updateStreak, updateGoal}
+
+// update Progress
+async function updateProgress(req, res) {
+    try {
+        const updatedProg = await Habit.findByIdAndUpdate(req.params.id, {$inc: {Progress: 1}})
+        res.status(200).json(updatedProg)
+    } catch (err) {
+        res.status(500).json({err})
+    }
+}
+
+module.exports = {index, show, create, destroy, updateFreq, updateStreak, updateGoal, updateProgress}

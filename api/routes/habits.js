@@ -12,6 +12,7 @@ router.post("/", habitController.create)
 router.patch("/:id/frequency", habitController.updateFreq)
 router.patch("/:id/goal", habitController.updateGoal)
 router.patch("/:id/streak", habitController.updateStreak)
+router.patch("/:id/progress", habitController.updateProgress)
 router.delete("/:id", habitController.destroy)
 
 

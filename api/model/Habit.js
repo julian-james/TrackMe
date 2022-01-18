@@ -13,15 +13,15 @@ const habitSchema = new mongoose.Schema({
     },
     Goal: {
         type: Boolean,
-        required: true
+        default: false
     },
     Streak: {
         type: Number,
-        required: true
+        default: 0
     },
     Progress: {
         type: Number,
-        required: true
+        default: 0
     }
 }, {collection: "habits"});
 
