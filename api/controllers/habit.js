@@ -3,7 +3,7 @@ const Habit = require("../model/Habit")
 // show all habits
 async function index(req, res) {
     try {
-        Habit.find()
+        await Habit.find()
             .then((result) => res.status(200).json(result))
             .catch((err) => console.log(err))
     } catch (err) {
@@ -14,7 +14,7 @@ async function index(req, res) {
 // show specific habit
 async function show(req, res) {
     try {
-        Habit.findById(req.params.id)
+        await Habit.findById(req.params.id)
         .then((result) => res.status(200).json(result))
         .catch((err) => console.log(err))
     } catch (err) {
@@ -28,9 +28,20 @@ async function create(req, res) {
         let item = req.body
         let data = await new Habit(item)
         data.save() 
-        res.status(201).json({message: "message"})
+        res.status(201).json({message: "added data"})
     } catch(err) {
         console.log("cannot create")
+    }
+}
+
+// delete a habit
+async function destroy(req, res) {
+    try {
+        const habit = await Habit.findByIdAndRemove(req.params.id, req.body)
+        .then((result) => res.status(200).json(result))
+        .catch((err) => console.log(err))
+    } catch(err) {
+        console.log("cannot destroy")
     }
 }
 
@@ -39,6 +50,6 @@ async function create(req, res) {
 
 //     }
 // }
-module.exports = {index, show, create}
+module.exports = {index, show, create, destroy}
 
 //  updateFreq, updateGoal, updateStreak, createHabit, editHabit, destroy

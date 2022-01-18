@@ -13,7 +13,7 @@ router.post("/", habitController.create)
 // router.patch("/:id/frequency", habitController.updateFreq)
 // router.patch("/:id/goal", habitController.updateGoal)
 // router.patch("/:id/streak", habitController.updateStreak)
-// router.delete("/:id", habitController.destroy)
+router.delete("/:id", habitController.destroy)
 
 
 module.exports = router;
