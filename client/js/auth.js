@@ -37,10 +37,12 @@ async function requestLogin(e){
         }
         const r = await fetch(`http://localhost:3000/api/user/login`, options)
         const data = await r.json()
+        console.log(data);
         if (data.err) { throw Error(data.err); }
         login(data);
     } catch (err) {
-        console.warn(`Error: ${err}`);
+        // console.log(`Error: ${err}`);
+        console.log('error');
     }
 }
 
@@ -57,7 +59,7 @@ async function requestRegistration(e) {
         if (data.err){ throw Error(data.err) }
         requestLogin(e);
     } catch (err) {
-        console.warn(err);
+        console.log(err);
     }
 }
 
