@@ -8,7 +8,7 @@ app.use(cors());
 const mongoose = require('mongoose');
 //Import Routes
 const authRoute = require('./routes/auth');
-const postRoute = require('./routes/habits')
+const habitRoute = require('./routes/habits')
 
 // dotenv.config();
 
@@ -25,7 +25,11 @@ app.use(express.json());
 
 //Route Middlewares
 app.use('/api/user', authRoute);
-app.use('/api/posts', postRoute);
+app.use('/habits', habitRoute);
+
+app.get("/", (req, res) => {
+    res.send("Hello")
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('server up and running'));

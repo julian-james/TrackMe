@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const habitSchema = new mongoose.Schema({
-    Habits: {
+    HabitName: {
         type: String,
         required: true,
         min: 3,
@@ -19,7 +19,7 @@ const habitSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-});
+}, {collection: "habits"});
 
 const Habit = mongoose.model('habit', habitSchema)
 
