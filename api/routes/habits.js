@@ -8,7 +8,7 @@ const habitController = require("../controllers/habit")
 
 router.get("/", habitController.index)
 router.get("/:id", habitController.show)
-// router.post("/", habitController.createHabit)
+router.post("/", habitController.create)
 // router.patch("/:id", habitController.editHabit)
 // router.patch("/:id/frequency", habitController.updateFreq)
 // router.patch("/:id/goal", habitController.updateGoal)
