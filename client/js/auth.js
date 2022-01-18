@@ -36,13 +36,13 @@ async function requestLogin(e){
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
         const r = await fetch(`http://localhost:3000/api/user/login`, options)
-        const data = await r.json()
+        const data = await r.text()/*.json()*/
         console.log(data);
-        if (data.err) { throw Error(data.err); }
+        if (data !== 'Logged in!') { throw Error(data.err); }
         login(data);
     } catch (err) {
-        // console.log(`Error: ${err}`);
-        console.log('error');
+        console.warn(`Error: ${err}`);
+        // console.log('error');
     }
 }
 
@@ -55,11 +55,11 @@ async function requestRegistration(e) {
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
         const r = await fetch(`http://localhost:3000/api/user/register`, options)
-        const data = await r.json()
+        const data = await r.text()/*json()*/
         if (data.err){ throw Error(data.err) }
         requestLogin(e);
     } catch (err) {
-        console.log(err);
+        console.warn(err);
     }
 }
 
