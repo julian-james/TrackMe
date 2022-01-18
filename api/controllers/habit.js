@@ -45,11 +45,15 @@ async function destroy(req, res) {
     }
 }
 
-// async function updateFreq(req, res) {
-//     try {
-
-//     }
-// }
-module.exports = {index, show, create, destroy}
+// update frequency
+async function updateFreq(req, res) {
+    try {
+        const updatedfreq = await Habit.findByIdAndUpdate(req.params.id, {$inc: {Frequency: 1}})
+        res.status(200).json(updatedfreq)
+    } catch (err) {
+        res.status(500).json({err})
+    }
+}
+module.exports = {index, show, create, destroy, updateFreq}
 
 //  updateFreq, updateGoal, updateStreak, createHabit, editHabit, destroy
