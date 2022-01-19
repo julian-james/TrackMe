@@ -1,27 +1,23 @@
-describe('author endpoints', () => {
-    let api;
-    beforeEach(async () => {
-        await resetTestDB()
+const request = require('supertest');
+const fs = require("fs");
+const { Pool } = require('pg');
+const app = require('../../index.js');
+
+const testSeed = fs.readFileSync(__dirname + '/test_seeds.sql').toString();
+
+const resetTestDB = () => {
+    return new Promise (async (resolve, reject) => {
+        try {
+            const db = new Pool()
+            await db.query(testSeed);
+            resolve('Test DB reset');
+        } catch (err) {
+            reject(`Test DB could not be reset: ${err} in ${err.file}`);
+        };
     });
+}
 
-    beforeAll(async () => {
-        api = app.listen(5000, () => console.log('Test server running on port 5000'))
-    });
-
-    afterAll(done => {
-        console.log('Gracefully stopping test server')
-        api.close(done)
-    })
-
-    it('should return a list of all authors in database', async () => {
-        const res = await request(api).get('/authors');
-        expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toEqual(2);
-    })
-    
-    it('should return a list of books by a specific author', async () => {
-        const res = await request(api).get('/authors/1');
-        expect(res.statusCode).toEqual(200);
-        expect(res.body.books.length).toEqual(2);
-    }) 
-})
+global.request = request;
+global.app = app;
+global.resetTestDB = resetTestDB;
+global.port = process.env.PORT || 5000;
