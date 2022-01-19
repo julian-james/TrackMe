@@ -1,4 +1,8 @@
 const Habit = require("../model/Habit")
+const request = require('request');
+const axios = require("axios")
+const schedule = require("node-schedule")
+
 
 // show all habits
 async function index(req, res) {
@@ -48,7 +52,7 @@ async function destroy(req, res) {
 // update frequency
 async function updateFreq(req, res) {
     try {
-        const updatedfreq = await Habit.findByIdAndUpdate(req.params.id, {$set: {Frequency: req.body.frequency}})
+        const updatedfreq = await Habit.findByIdAndUpdate(req.params.id, {$set: {Frequency: req.body.Frequency}})
         res.status(200).json(updatedfreq)
     } catch (err) {
         res.status(500).json({err})
@@ -65,6 +69,51 @@ async function updateStreak(req, res) {
     }
 }
 
+// update progress
+async function updateProgress(req, res) {
+    try {
+        const id = req.params.id
+        const updatedProg = await Habit.findByIdAndUpdate(req.params.id, {$inc: {Progress: 1}})    
+        if (await updatedProg.Progress == updatedProg.Frequency) {
+            updating(id)
+        }
+        res.status(200).json(updatedProg)
+    } catch (err) {
+        res.status(500).json({err})
+    }
+}
+
+// updating the streak
+async function updating(id) {
+    // This updates the streak when frequency meets progress.
+    result = await request.patch(`http://localhost:3000/habits/${id}/streak`)
+    // goal is false by default, when frequency is = progress, goal is completed for the day.
+    resultComplete = await request.patch(`http://localhost:3000/habits/${id}/goal`)
+}
+
+// Every time at 59 seconds, runs resetProgress
+    schedule.scheduleJob("59 * * * * *", () => {
+    resetProgress()
+    console.log("resetted any goals not met")
+})
+
+async function resetProgress() {
+    // check if goal is true for all habits, if goal is false, reset streak + progress to 0 and goal to false. If goal is true, reset progress + goal/
+    // loop through each function
+    result = await axios.get("http://localhost:3000/habits")
+    data = result.data
+    data.forEach(async habit => {
+        const id = habit._id
+        if (habit.Goal !== true) {
+            const resetStreak = await Habit.findByIdAndUpdate(id, {$set: {Streak: 0}})   
+            const resetProgress = await Habit.findByIdAndUpdate(id, {$set: {Progress: 0}})  
+        } else {
+            const resetProgress = await Habit.findByIdAndUpdate(id, {$set: {Progress: 0}})  
+            const resetGoal = await Habit.findByIdAndUpdate(id, {$set: {Goal: false}}) 
+        }
+    })
+}
+
 // update Goal
 async function updateGoal(req, res) {
     try {
@@ -75,14 +124,5 @@ async function updateGoal(req, res) {
     }
 }
 
-// update Progress
-async function updateProgress(req, res) {
-    try {
-        const updatedProg = await Habit.findByIdAndUpdate(req.params.id, {$inc: {Progress: 1}})
-        res.status(200).json(updatedProg)
-    } catch (err) {
-        res.status(500).json({err})
-    }
-}
 
 module.exports = {index, show, create, destroy, updateFreq, updateStreak, updateGoal, updateProgress}
