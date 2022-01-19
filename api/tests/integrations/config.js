@@ -1,7 +1,7 @@
 const request = require('supertest');
 const fs = require("fs");
 const { Pool } = require('pg');
-const app = require('../../server.js');
+const app = require('../../index.js');
 
 const testSeed = fs.readFileSync(__dirname + '/test_seeds.sql').toString();
 
