@@ -22,7 +22,8 @@ const habitSchema = new mongoose.Schema({
     Progress: {
         type: Number,
         default: 0
-    }
+    },
+    
 }, {collection: "habits"});
 
 // everytime done is clicked, increments progress and when prog is = to freq , add 1 to streak, and have a variable "completed today" and set to true and after 24hr, reset prog to 0 and if completed today = false, set streak to 0.

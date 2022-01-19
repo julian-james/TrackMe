@@ -3,7 +3,6 @@ const app = express();
 
 app.use(express.json());
 
-
 const dotenv = require('dotenv');
 
 
@@ -27,6 +26,7 @@ mongoose.connect(
 
 
 // Middleware
+
 
 //Route Middlewares
 app.use('/api/user', authRoute);

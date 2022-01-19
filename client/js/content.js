@@ -1,3 +1,6 @@
+const createHabitForm = document.querySelector('#create-habit-form');
+createHabitForm.addEventListener('submit', createNewHabit);
+
 function renderHomepage(){
     const logo = document.createElement('img');
     logo.id = 'logo';
@@ -48,6 +51,21 @@ function renderRegisterForm() {
 async function renderFeed() {
     const feed = document.createElement('section');
     feed.id = 'feed';
+    const addHabit = document.createElement('form');
+    addHabit.setAttribute("id", "create-habit-form")
+    const createHabitLabel = document.createElement('label');
+    createHabitLabel.setAttribute("for", "habit_input");
+    createHabitLabel.textContent = "Create a Habit";
+    const habitInput = document.createElement('input');
+    habitInput.setAttribute("id", "habit_input");
+    habitInput.setAttribute("type", "text");
+    const habitSubmit = document.createElement('input');
+    habitSubmit.setAttribute("type", "submit");
+    habitSubmit.setAttribute("value", "submit");
+    addHabit.appendChild(createHabitLabel);
+    addHabit.appendChild(habitInput);
+    addHabit.appendChild(habitSubmit);
+    main.appendChild(addHabit);
     const posts = await getAllHabits();
     const renderPost = postData => {
         const post = document.createElement('div');
@@ -57,14 +75,16 @@ async function renderFeed() {
         const habitName = document.createElement('p');
         const progress = document.createElement('p');
         const streak = document.createElement('p');
+
         frequency.textContent = `Frequency: ${postData.Frequency}`;
         goal.textContent = `Goal: ${postData.Goal}`;
         habitName.textContent = `Habit: ${postData.HabitName}`;
         progress.textContent = `Progress: ${postData.Progress}`;
         streak.textContent = `Streak: ${postData.Streak}`;
+
+        post.appendChild(habitName);
         post.appendChild(frequency);
         post.appendChild(goal);
-        post.appendChild(habitName);
         post.appendChild(progress);
         post.appendChild(streak);
         feed.appendChild(post);
@@ -85,4 +105,93 @@ function render404() {
     const error = document.createElement('h2');
     error.textContent = "Oops, we can't find that page sorry!";
     main.appendChild(error);
+}
+
+// async function createNewHabit(e) {
+//     e.preventDefault();
+//     try {
+//         const options = {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+//         }
+//         const r = await fetch(`http://localhost:3000/habits`, options)
+//         const data = await r.text()/*json()*/
+//         console.log(data)
+//         // if (data.err){ throw Error(data.err) }
+//         // requestLogin(e);
+
+//     } catch (err) {
+//         console.warn(err);
+//     }
+// }
+
+
+
+
+async function createNewHabit(e){
+    e.preventDefault();
+
+    try {
+        const habitData = {
+            HabitName: e.target.habit_input.value,
+            Frequency: 0,
+            Goal: false,
+            Progress: 0,
+            Streak: 0
+        };
+    
+        const options = { 
+            method: 'POST',
+            body: JSON.stringify(habitData),
+            headers: { "Content-Type": "application/json" }
+        };
+    
+        await fetch('http://localhost:3000/habits', options)
+            .then(r => r.json())
+            .then(appendHabit)
+            .then(() => e.target.reset())
+            .catch(console.warn)
+    } catch (err) {
+        console.warn(err)
+    }
+};
+
+function appendHabit(habitData){
+    const newRow = document.createElement('div');
+    const habitLi = formatHabitDiv(habitData, newRow)
+    dogsList.append(newRow);
+};
+
+function formatHabitDiv(habit, div){
+    const frequency = document.createElement('p');
+    const goal = document.createElement('p');
+    const habitName = document.createElement('p');
+    const progress = document.createElement('p');
+    const streak = document.createElement('p');
+
+    const delBtn = document.createElement('button');
+    const uptBtn = document.createElement('button');
+    delBtn.setAttribute('class', 'delete')
+    uptBtn.setAttribute('class', 'update')
+    delBtn.textContent = 'X';
+    uptBtn.textContent = '+';
+    delBtn.onclick = () => deleteDog(habit.id, div);
+    uptBtn.onclick = () => updateDog(habit.id, div);
+    delTd.append(delBtn);
+    uptTd.append(uptBtn);
+
+    frequency.textContent = `Frequency: ${habit.Frequency}`;
+    goal.textContent = `Goal: ${habit.Goal}`;
+    habitName.textContent = `Habit: ${habit.HabitName}`;
+    progress.textContent = `Progress: ${habit.Progress}`;
+    streak.textContent = `Streak: ${habit.Streak}`;
+
+    div.append(frequency)
+    div.append(goal)
+    div.append(habitName)
+    div.append(progress)
+    div.append(streak)
+
+    return div
 }
