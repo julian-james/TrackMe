@@ -1,5 +1,5 @@
-const createHabitForm = document.querySelector('#create-habit-form');
-createHabitForm.addEventListener('submit', createNewHabit);
+const createHabitForm = document.querySelector('#create_habit_form');
+const habitsList = document.querySelector('#feed');
 
 function renderHomepage(){
     const logo = document.createElement('img');
@@ -51,21 +51,41 @@ function renderRegisterForm() {
 async function renderFeed() {
     const feed = document.createElement('section');
     feed.id = 'feed';
-    const addHabit = document.createElement('form');
-    addHabit.setAttribute("id", "create-habit-form")
-    const createHabitLabel = document.createElement('label');
-    createHabitLabel.setAttribute("for", "habit_input");
-    createHabitLabel.textContent = "Create a Habit";
-    const habitInput = document.createElement('input');
-    habitInput.setAttribute("id", "habit_input");
-    habitInput.setAttribute("type", "text");
-    const habitSubmit = document.createElement('input');
-    habitSubmit.setAttribute("type", "submit");
-    habitSubmit.setAttribute("value", "submit");
-    addHabit.appendChild(createHabitLabel);
-    addHabit.appendChild(habitInput);
-    addHabit.appendChild(habitSubmit);
-    main.appendChild(addHabit);
+    // const addHabit = document.createElement('form');
+    // const createHabitLabel = document.createElement('label');
+    // const habitInput = document.createElement('input');
+    // const habitSubmit = document.createElement('input');
+
+    // addHabit.setAttribute("id", "create_habit_form")
+    // createHabitLabel.setAttribute("for", "habit_input");
+    // createHabitLabel.textContent = "Create a Habit";
+    // habitInput.setAttribute("id", "habit_input");
+    // habitInput.setAttribute("type", "text");
+    // habitSubmit.setAttribute("type", "submit");
+    // habitSubmit.setAttribute("value", "submit");
+
+    // addHabit.appendChild(createHabitLabel);
+    // addHabit.appendChild(habitInput);
+    // addHabit.appendChild(habitSubmit);
+    // main.appendChild(addHabit);
+
+    const fields = [
+        { tag: 'label', attributes: { for: 'habit_input', name: 'habit'} },
+        { tag: 'input', attributes: { id: 'habit_input', type: 'text', name: 'habit', placeholder: 'Enter New Habit' } },
+        { tag: 'input', attributes: { type: 'submit', value: 'Submit' } }
+    ]
+    const form = document.createElement('form');
+    form.id = 'create_habit_form';
+    fields.forEach(f => {
+        let field = document.createElement(f.tag);
+        Object.entries(f.attributes).forEach(([a, v]) => {
+            field.setAttribute(a, v);
+            form.appendChild(field);
+        })
+    })
+    main.appendChild(form);
+
+    
     const posts = await getAllHabits();
     const renderPost = postData => {
         const post = document.createElement('div');
@@ -129,10 +149,14 @@ function render404() {
 
 
 
+
+
+
+
+
 async function createNewHabit(e){
     e.preventDefault();
 
-    try {
         const habitData = {
             HabitName: e.target.habit_input.value,
             Frequency: 0,
@@ -152,15 +176,13 @@ async function createNewHabit(e){
             .then(appendHabit)
             .then(() => e.target.reset())
             .catch(console.warn)
-    } catch (err) {
-        console.warn(err)
-    }
 };
 
 function appendHabit(habitData){
-    const newRow = document.createElement('div');
-    const habitLi = formatHabitDiv(habitData, newRow)
-    dogsList.append(newRow);
+    const div = document.createElement('div');
+    div.className = 'post';
+    const habitLi = formatHabitDiv(habitData, div)
+    habitsList.append(div);
 };
 
 function formatHabitDiv(habit, div){
@@ -170,16 +192,16 @@ function formatHabitDiv(habit, div){
     const progress = document.createElement('p');
     const streak = document.createElement('p');
 
-    const delBtn = document.createElement('button');
-    const uptBtn = document.createElement('button');
-    delBtn.setAttribute('class', 'delete')
-    uptBtn.setAttribute('class', 'update')
-    delBtn.textContent = 'X';
-    uptBtn.textContent = '+';
-    delBtn.onclick = () => deleteDog(habit.id, div);
-    uptBtn.onclick = () => updateDog(habit.id, div);
-    delTd.append(delBtn);
-    uptTd.append(uptBtn);
+    // const delBtn = document.createElement('button');
+    // const uptBtn = document.createElement('button');
+    // delBtn.setAttribute('class', 'delete')
+    // uptBtn.setAttribute('class', 'update')
+    // delBtn.textContent = 'X';
+    // uptBtn.textContent = '+';
+    // delBtn.onclick = () => deleteDog(habit.id, div);
+    // uptBtn.onclick = () => updateDog(habit.id, div);
+    // delTd.append(delBtn);
+    // uptTd.append(uptBtn);
 
     frequency.textContent = `Frequency: ${habit.Frequency}`;
     goal.textContent = `Goal: ${habit.Goal}`;
@@ -195,3 +217,28 @@ function formatHabitDiv(habit, div){
 
     return div
 }
+
+
+
+
+// async function createNewHabit2(e) {
+//     e.preventDefault();
+//     try {
+//         const options = {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+//         }
+//         const r = await fetch(`http://localhost:3000/habits`, options)
+//         const data = await r.text()/*json()*/
+//         if (data.err){ throw Error(data.err) }
+//         // requestLogin(e);
+//     } catch (err) {
+//         console.warn(err);
+//     }
+// }
+
+
+
+
+createHabitForm.addEventListener('submit', createNewHabit);
