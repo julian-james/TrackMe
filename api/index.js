@@ -1,16 +1,21 @@
 const express = require('express'); 
 const app = express(); 
-// const dotenv = require('dotenv');
+
+app.use(express.json());
+
+
+const dotenv = require('dotenv');
+
 
 const cors = require('cors');
-app.use(cors());
+app.use(cors('*'));
 
 const mongoose = require('mongoose');
 //Import Routes
 const authRoute = require('./routes/auth');
 const habitRoute = require('./routes/habits')
 
-// dotenv.config();
+dotenv.config();
 
 // Connect to DB
 mongoose.connect(
@@ -20,8 +25,8 @@ mongoose.connect(
     () => console.log('connected to db!')
 );
 
+
 // Middleware
-app.use(express.json());
 
 //Route Middlewares
 app.use('/api/user', authRoute);
