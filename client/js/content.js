@@ -52,12 +52,21 @@ async function renderFeed() {
     const renderPost = postData => {
         const post = document.createElement('div');
         post.className = 'post';
-        const user = document.createElement('h3');
-        const body = document.createElement('p');
-        user.textContent = postData.username;
-        body.textContent = postData.body;
-        post.appendChild(user);
-        post.appendChild(body);
+        const frequency = document.createElement('p');
+        const goal = document.createElement('p');
+        const habitName = document.createElement('p');
+        const progress = document.createElement('p');
+        const streak = document.createElement('p');
+        frequency.textContent = `Frequency: ${postData.Frequency}`;
+        goal.textContent = `Goal: ${postData.Goal}`;
+        habitName.textContent = `Habit: ${postData.HabitName}`;
+        progress.textContent = `Progress: ${postData.Progress}`;
+        streak.textContent = `Streak: ${postData.Streak}`;
+        post.appendChild(frequency);
+        post.appendChild(goal);
+        post.appendChild(habitName);
+        post.appendChild(progress);
+        post.appendChild(streak);
         feed.appendChild(post);
     }
     posts.forEach(renderPost);

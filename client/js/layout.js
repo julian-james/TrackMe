@@ -1,7 +1,7 @@
 const nav = document.querySelector('nav');
 const main = document.querySelector('main');
 
-const publicRoutes = ['#', '#login', '#register'];
+const publicRoutes = [/*'#',*/ '#login', '#register'];
 const privateRoutes = ['#feed', '#profile'];
 
 window.addEventListener('hashchange', updateContent);
