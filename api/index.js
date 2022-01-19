@@ -1,6 +1,11 @@
 const express = require('express'); 
 const app = express(); 
+
+app.use(express.json());
+
+
 const dotenv = require('dotenv');
+
 
 const cors = require('cors');
 app.use(cors('*'));
@@ -20,8 +25,8 @@ mongoose.connect(
     () => console.log('connected to db!')
 );
 
+
 // Middleware
-app.use(express.json());
 
 //Route Middlewares
 app.use('/api/user', authRoute);
