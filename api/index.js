@@ -9,15 +9,8 @@ app.use(cors());
 
 const mongoose = require('mongoose');
 //Import Routes
-
-
-const authRoutes = require('./controllers/auth');
-app.use('/auth', authRoutes);
-
-// const authRoute = require('./routes/auth');
-// const postRoute = require('./routes/habits')
-// app.use('/api/user', authRoute);
-// app.use('/api/posts', postRoute);
+const authRoute = require('./routes/auth');
+const habitRoute = require('./routes/habits')
 
 // dotenv.config();
 
@@ -33,7 +26,12 @@ mongoose.connect(
 // Middleware
 
 //Route Middlewares
+app.use('/api/user', authRoute);
+app.use('/habits', habitRoute);
 
+app.get("/", (req, res) => {
+    res.send("Hello")
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('server up and running'));
