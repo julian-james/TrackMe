@@ -15,5 +15,4 @@ router.patch("/:id/streak", habitController.updateStreak)
 router.patch("/:id/progress", habitController.updateProgress)
 router.delete("/:id", habitController.destroy)
 
-
 module.exports = router;
