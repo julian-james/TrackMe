@@ -82,6 +82,10 @@ async function addNewHabit(e) {
     const name = e.target.form[0].value
     const freq = e.target.form[1].value 
 
+    if(name ==""){
+        return validateForm()
+    }
+
         const options = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -104,6 +108,7 @@ async function deleteHabit(e) {
     location.reload()
 }
 
+
 async function renderFeed() {
     const feed = document.createElement('section');
     feed.id = 'feed';
@@ -115,7 +120,11 @@ async function renderFeed() {
     const habitNameInput = document.createElement("input")
     const frequencyInput = document.createElement("input")
     const submitBtn = document.createElement("button")
-    
+    frequencyInput.setAttribute("type", "number")
+    frequencyInput.setAttribute("value", "1")
+    habitNameInput.classList.add("habitNameInput")
+    habitNameInput.setAttribute("placeholder", "Enter name of habit")
+
     submitBtn.addEventListener("click", addNewHabit)
 
     addHabitDiv.classList.add("addHabitDiv")
@@ -128,6 +137,7 @@ async function renderFeed() {
 
     main.appendChild(addHabitDiv)
     addHabitDiv.appendChild(addHabitForm)
+    
     addHabitForm.appendChild(habitNameInput)
     addHabitForm.appendChild(frequencyInput)
     addHabitForm.appendChild(submitBtn)
@@ -137,8 +147,13 @@ async function renderFeed() {
     const addHabitBtn = document.createElement("button")
     BtnDiv.appendChild(addHabitBtn)
     main.appendChild(BtnDiv)
+    main.appendChild(addHabitDiv)
     addHabitBtn.textContent= "Add Habit"
     submitBtn.textContent= "Submit new habit"
+    addHabitBtn.classList.add("addHabitBtn")
+
+    addHabitBtn.addEventListener("click", showAddHabitForm)
+    addHabitBtn.classList.add('button-53')
 
     // habit section
     const renderHabit = habitData => {
@@ -149,7 +164,6 @@ async function renderFeed() {
         const HabitStreak = document.createElement("h2")
         const ProgressBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
-        const progressNumber = document.createElement("p")
         const habitGoal = document.createElement("h3")
 
         // circuluar progress bar
@@ -176,7 +190,6 @@ async function renderFeed() {
         HabitStreak.textContent = habitData.Streak
         ProgressBtn.textContent = "+"
         deleteBtn.textContent = "x"
-        progressNumber.textContent = habitData.Progress
       
         // habit tracking goal 
         if(habitData.Frequency - habitData.Progress > 0) {
@@ -198,7 +211,6 @@ async function renderFeed() {
         HabitDiv.appendChild(progressBarDiv)
         progressBarDiv.appendChild(outer)
         outer.appendChild(inner)
-        ProgressBtn.appendChild(progressNumber)
         feed.appendChild(HabitDiv)
 
         ProgressBtn.addEventListener("click", addProgress)
@@ -213,7 +225,14 @@ async function renderFeed() {
     
 }
 
+async function validateForm() {
+    alert("Input a name for the habit")
+}
 
+async function showAddHabitForm() {
+    const div = document.querySelector(".addHabitDiv")
+    div.classList.toggle("moveHabitDiv")
+}
 
 function renderProfile() {
     const profile = document.createElement('section');
