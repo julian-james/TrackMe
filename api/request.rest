@@ -2,8 +2,8 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-    "name": "Freddy",
-    "email": "fre@erf.com",
+    "name": "Garry GGdfs",
+    "email": "garryl@email.com",
     "password": "asdfgh"
 }
 
@@ -21,6 +21,6 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/api/posts
+GET http://localhost:3000/habits
 Content-Type: application/json
 auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWU1MzVhZjFmNTk4MjM3NWYzODVmN2EiLCJpYXQiOjE2NDI0MTY4MDZ9.5DwWdzReyZGI7_btyHMM0ksRosWLVj7jqIQMXMC0Z00

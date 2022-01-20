@@ -241,4 +241,4 @@ function formatHabitDiv(habit, div){
 
 
 
-createHabitForm.addEventListener('submit', createNewHabit);
+// createHabitForm.addEventListener('submit', createNewHabit);

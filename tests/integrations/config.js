@@ -1,6 +1,6 @@
 const request = require('supertest');
 const fs = require("fs");
-const { Pool } = require('pg');
+const { Pool } = require('mongoose');
 const app = require('../../index.js');
 
 const testSeed = fs.readFileSync(__dirname + '/test_seeds.sql').toString();
@@ -20,4 +20,4 @@ const resetTestDB = () => {
 global.request = request;
 global.app = app;
 global.resetTestDB = resetTestDB;
-global.port = process.env.PORT || 5000;
+global.port = process.env.PORT || 3000;

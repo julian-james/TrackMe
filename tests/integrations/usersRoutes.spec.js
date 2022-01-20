@@ -1,3 +1,5 @@
+const app = require('api/index.js')
+
 describe('habit endpoints', ()=>{
     let api;
     beforeEach(async () => {
@@ -5,7 +7,7 @@ describe('habit endpoints', ()=>{
     });
 
     beforeAll(async () => {
-        api = app.listen(5000, () => console.log('Test server running on port 5000'))
+        api = app.listen(3000, () => console.log('Test server running on port 5000'))
     });
 
     afterAll(async () => {

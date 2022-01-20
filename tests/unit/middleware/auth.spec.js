@@ -5,7 +5,7 @@ const mockStatus = jest.fn(code => ({ send: mockSend, json: mockJson, end: jest.
 const mockRes = { status: mockStatus }
 
 const jwt = require('jsonwebtoken')
-const auth = require('../../../middleware/auth')
+const auth = require('api/routes/verifyToken.js')
 
 //need to come back to this
 describe('verifyToken', ()=>{

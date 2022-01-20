@@ -1,15 +1,19 @@
+const bodyParser = require('body-parser');
 const express = require('express'); 
 const app = express(); 
-
-app.use(express.json());
-
-const dotenv = require('dotenv');
-
-
 const cors = require('cors');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+
+// Added this line to try and overcome terminal error
+app.use(
+    express.urlencoded({ extended: true })
+);
+app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors('*'));
 
-const mongoose = require('mongoose');
+
 //Import Routes
 const authRoute = require('./routes/auth');
 const habitRoute = require('./routes/habits')
@@ -39,3 +43,5 @@ app.get("/", (req, res) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('server up and running'));
 
+
+module.exports = app;
