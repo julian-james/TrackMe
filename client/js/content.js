@@ -48,28 +48,32 @@ function renderRegisterForm() {
 async function renderFeed() {
     const feed = document.createElement('section');
     feed.id = 'feed';
-    const posts = await getAllHabits();
-    const renderPost = postData => {
-        const post = document.createElement('div');
-        post.className = 'post';
-        const frequency = document.createElement('p');
-        const goal = document.createElement('p');
-        const habitName = document.createElement('p');
-        const progress = document.createElement('p');
-        const streak = document.createElement('p');
-        frequency.textContent = `Frequency: ${postData.Frequency}`;
-        goal.textContent = `Goal: ${postData.Goal}`;
-        habitName.textContent = `Habit: ${postData.HabitName}`;
-        progress.textContent = `Progress: ${postData.Progress}`;
-        streak.textContent = `Streak: ${postData.Streak}`;
-        post.appendChild(frequency);
-        post.appendChild(goal);
-        post.appendChild(habitName);
-        post.appendChild(progress);
-        post.appendChild(streak);
-        feed.appendChild(post);
+    const habits = await getAllHabits();
+
+    // add button section
+    const BtnDiv = document.createElement("div")
+    const addHabitBtn = document.createElement("button")
+    BtnDiv.appendChild(addHabitBtn)
+    main.appendChild(BtnDiv)
+    addHabitBtn.textContent= "Add Habit"
+
+    // habit section
+    const renderHabit = habitData => {
+
+        const HabitDiv = document.createElement("div")
+        const name = document.createElement("h2")
+        const HabitStreak = document.createElement("h2")
+        const ProgressBtn = document.createElement("button")
+
+        name.textContent = habitData.HabitName
+        HabitStreak.textContent = habitData.Streak
+        
+        HabitDiv.appendChild(name)
+        HabitDiv.appendChild(HabitStreak)
+        HabitDiv.appendChild(ProgressBtn)
+        feed.appendChild(HabitDiv)
     }
-    posts.forEach(renderPost);
+    habits.forEach(renderHabit);
     main.appendChild(feed);
 }
 

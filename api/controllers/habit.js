@@ -92,7 +92,7 @@ async function updating(id) {
 }
 
 // Every time at 59 seconds, runs resetProgress
-    schedule.scheduleJob("59 * * * * *", () => {
+schedule.scheduleJob("59 * * * * *", () => {
     resetProgress()
     console.log("resetted any goals not met")
 })
