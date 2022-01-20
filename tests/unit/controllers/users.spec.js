@@ -6,7 +6,9 @@ const mockJson = jest.fn();
 const mockStatus = jest.fn(code => ({ send: mockSend, json: mockJson }))
 const mockRes = { status: mockStatus }
 
-const db = require('../../../db/db');
+// const db = require('../../../db/db');
+const db = require('../../integrations/config')
+
 const bcrypt = require('bcryptjs');
 
 describe('users controller', () => {

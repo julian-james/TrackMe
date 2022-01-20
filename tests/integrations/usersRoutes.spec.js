@@ -1,4 +1,5 @@
 const app = require('api/index.js')
+const request = require('supertest')
 
 describe('habit endpoints', ()=>{
     let api;
@@ -34,32 +35,4 @@ describe('habit endpoints', ()=>{
         //expect(res.text.msg).toBe('User found')
     })
 
-    it('registers new user', async()=>{
-        const res = await request(api)
-            .post('/register')
-            .send({
-                username: "meni",
-                email: 'meni@test.com',
-                password:'123123'
-            })
-        expect(res.statusCode).toBe(201)
-
-        let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNjM5NTgyNTc2fQ.Rocg5YEBb0LeddFAi6FEXkZCbCabwu4dVn0QC-yUPtw"
-
-        const res1 = await request(api)
-            .get('/exists/meni')
-            .set('Authorization','Bearer '+ authToken)
-        
-        expect(res1.statusCode).toBe(201)
-    })
-
-    it('logs in user', async ()=>{
-        const res = await request(api)
-            .post('/login')
-            .send({
-                email: 'test1@gmail.com',
-                password: 'test'
-            })
-        expect(res.statusCode).toBe(200)
-    })
 })

@@ -1,7 +1,7 @@
 cd into api folder and install these 2 dependencies
 npm i @hapi/joi
 npm i dotenv
-
+npm i mongodb-memory-server
 npm i bcryptjs
 
 

@@ -11,6 +11,7 @@ const databaseUrl = "mongodb+srv://julian:rhino11@cluster0.bdrta.mongodb.net/myF
 
 
 // const db = require('../../../db/db');
+const db = require('../../integrations/config')
 
 const testUser = {
     // _id: 'testing',
