@@ -1,12 +1,20 @@
-const User = require('../../../model/User');
-const Habit = require('../../../model/Habit');
+// const User = require('../../../model/User');
+// const Habit = require('../../../model/Habit');
+const User = require('api/model/User.js');
+const Habit = require('api/model/Habit.js')
 
-jest.mock('../../../model/User');
 
-const pg = require('pg');
-jest.mock('pg');
 
-const db = require('../../../db/db');
+jest.mock('api/model/User.js');
+
+const mongoose = require('mongoose')
+jest.mock('mongoose');
+
+const databaseUrl = "mongodb+srv://julian:rhino11@cluster0.bdrta.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+// const db = require('../../../db/db');
+const db = require('../../integrations/config')
+  
 
 const user = {
     user_id: 10,
@@ -35,9 +43,18 @@ const habits = [
 ]
 
 describe('Habit', () =>{
-    beforeEach(() => jest.clearAllMocks())
+
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
+    // beforeAll(async () => {
+    //     await mongoose.connect(databaseUrl, { useNewUrlParser: true });
+    //   });
+
+    // beforeEach(() => jest.clearAllMocks())
     
-    afterAll(() => jest.resetAllMocks())
+    // afterAll(() => jest.resetAllMocks())
 
     describe('all', ()=>{
         test('resolves with habits on successful db query', async () =>{

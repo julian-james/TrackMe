@@ -26,12 +26,24 @@ body {
   size: 200%;
 }
 
+
 h1{
     font-family: 'BohrDonni', sans-serif;
     font-size: 1rem;
     font-weight: 100;
     text-align: center;
     padding: 50px;
+
+nav {
+    position: static;
+    top: -10px;
+    width: 86%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px 75px;
+    background-color: #3b5998;
+    color: white;
+
 }
 
 /* from content.js 2 CONST*/

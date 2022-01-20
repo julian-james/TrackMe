@@ -1,31 +1,84 @@
-const User = require('../../../model/User');
-const Habit = require('../../../model/Habit');
+const User = require('api/model/User.js');
+const Habit = require('api/model/Habit.js');
 
-jest.mock('../../../model/Habit');
+jest.mock('api/model/Habit.js');
 
-const pg = require('pg');
-jest.mock('pg');
+const mongoose = require('mongoose')
+jest.mock('mongoose');
 
-const db = require('../../../db/db');
+const databaseUrl = "mongodb+srv://julian:rhino11@cluster0.bdrta.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+
+
+// const db = require('../../../db/db');
+const db = require('../../integrations/config')
 
 const testUser = {
-    user_id: 'testing',
-    username: 'test_usr',
+    // _id: 'testing',
+    name: 'test_usr',
     email: 'test@test.com',
-    usr_password: '123'
+    password: '123'
 }
 
 const testUser2 = {
-    user_id: '3',
-    username: 'trackme',
+    // _id: '3',
+    name: 'trackme',
     email: 'trackme@gmail.com',
-    usr_password: 'habit'
+    password: 'habit'
 }
 
 describe('Habit', () =>{
-    beforeEach(() => jest.clearAllMocks())
+
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
+    // beforeAll(async () => {
+    //     await mongoose.connect(databaseUrl, { useNewUrlParser: true });
+    //   });
+
+    // beforeEach(() => jest.clearAllMocks())
     
-    afterAll(() => jest.resetAllMocks())
+    // afterEach(async () => {
+    //     await User.deleteMany();
+    //   });
+
+    // afterAll(() => jest.resetAllMocks())
+
+    // // it("Should save user to database", async done => {
+    // //     const res = await request.post("/register").send({
+    // //       name: "Zella Zingly",
+    // //       email: "testing@email.com",
+    // //       password: "asdfgh"
+    // //     });
+      
+    // //     // Searches the user in the database
+    // //     const user = await User.findOne({ email: "testing@gmail.com" });
+      
+    // //     done();
+    // //   });
+
+    it("Should save user to database", async done => {
+        // Sends request...
+      
+        // Searches the user in the database
+        const user = await User.findOne({ email: "Trent@email.com" });
+        expect(user.name).toBeTruthy();
+        expect(user.email).toBeTruthy();
+      
+        done();
+      });
+
+      it("Should save user to database", async done => {
+        // Sends request...
+      
+        // Searches the user in the database...
+      
+        // Ensures response contains name and email
+        expect(res.body.name).toBeTruthy();
+        expect(res.body.email).toBeTruthy();
+        done();
+      });
 
     describe('all', ()=>{
         test('resolves all users on success', async () =>{

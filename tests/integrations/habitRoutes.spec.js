@@ -1,20 +1,71 @@
-const auth = require('../../middleware/auth');
+const request = require('supertest')
+const auth = require('api/routes/verifyToken.js');
+const app = require('api/index.js')
+const db = require('./config')
 
 describe('habit endpoints', ()=>{
     let api;
-    beforeEach(async () => {
-        await resetTestDB()
-    });
+    let habit = {
+        HabitName: "Drink Water",
+        Frequency: 2,
+        Goal: false,
+        Streak: 0,
+        Progress: 0
+    }
+
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
+    // beforeEach(async () => {
+    //     await resetTestDB()
+    // });
 
     beforeAll(async () => {
         api = app.listen(5000, () => console.log('Test server running on port 5000'))
     });
 
-    afterAll(async () => {
-        console.log('Gracefully stopping test server')
-        await api.close()
-    })
+    // afterAll(async () => {
+    //     console.log('Gracefully stopping test server')
+    //     await api.close()
+    // })
     
+    it('responds to get / with status 200', (done) => {
+        request(api).get('/').expect(200, done);
+    });
+
+    it('responds to get /habits with status 200', (done) => {
+        request(api).get('/habits').expect(200, done);
+    });
+
+    it('responds to post /habits with status 201', (done) => {
+        request(api)
+            .post('/habits')
+            .send(habit)
+            .set('Accept', /application\/json/)
+            .expect({message: `Habit number ${habit.id} request successfully`}, done);
+    });
+
+    it('responds to get /habits/200 with status 404', (done) => {
+        request(api).get('/habits/200').expect(404, done);
+    });
+
+    it('retrieves a habit by id', (done) => {
+        request(api)
+            .get('/habits/61e6bf2917b6cedc5d3fab28')
+            .expect(200)
+            .expect({ id: "61e6bf2917b6cedc5d3fab28",
+                HabitName: "Drink Water",
+                Frequency:  "2",
+                Goal:  "false",
+                Streak: "0",
+                Progress: "0" }, done);
+    });
+
+    it('responds to non existing paths with 404', (done) => {
+        request(api).get('/no').expect(404, done);
+    });
+
     it('/:name', async () =>{
         //middleware required
         let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNjM5NTgyNTc2fQ.Rocg5YEBb0LeddFAi6FEXkZCbCabwu4dVn0QC-yUPtw"
