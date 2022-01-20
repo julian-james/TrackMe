@@ -1,5 +1,3 @@
-const e = require("express");
-
 
 function renderHomepage(){
     const logo = document.createElement('img');
@@ -69,6 +67,10 @@ async function addNewHabit(e) {
     const name = e.target.form[0].value
     const freq = e.target.form[1].value 
 
+    if(name ==""){
+        return validateForm()
+    }
+
         const options = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -103,11 +105,14 @@ async function renderFeed() {
     const habitNameInput = document.createElement("input")
     const frequencyInput = document.createElement("input")
     const submitBtn = document.createElement("button")
-    
+    frequencyInput.setAttribute("type", "number")
+    frequencyInput.setAttribute("value", "1")
+    habitNameInput.classList.add("habitNameInput")
+    habitNameInput.setAttribute("placeholder", "Enter name of habit")
+
     submitBtn.addEventListener("click", addNewHabit)
 
     addHabitDiv.classList.add("addHabitDiv")
-    
     addHabitDiv.appendChild(addHabitForm)
     
     addHabitForm.appendChild(habitNameInput)
@@ -135,7 +140,6 @@ async function renderFeed() {
         const HabitStreak = document.createElement("h2")
         const ProgressBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
-        const progressNumber = document.createElement("p")
         const habitGoal = document.createElement("h3")
 
         // circuluar progress bar
@@ -160,7 +164,6 @@ async function renderFeed() {
         HabitStreak.textContent = habitData.Streak
         ProgressBtn.textContent = "+"
         deleteBtn.textContent = "x"
-        progressNumber.textContent = habitData.Progress
       
         // habit tracking goal 
         if(habitData.Frequency - habitData.Progress > 0) {
@@ -182,7 +185,6 @@ async function renderFeed() {
         HabitDiv.appendChild(progressBarDiv)
         progressBarDiv.appendChild(outer)
         outer.appendChild(inner)
-        ProgressBtn.appendChild(progressNumber)
         feed.appendChild(HabitDiv)
 
         ProgressBtn.addEventListener("click", addProgress)
@@ -195,6 +197,10 @@ async function renderFeed() {
     habits.forEach(renderHabit);
     main.appendChild(feed);
     
+}
+
+async function validateForm() {
+    alert("Input a name for the habit")
 }
 
 async function showAddHabitForm() {
