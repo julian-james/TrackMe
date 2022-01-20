@@ -1,12 +1,19 @@
-const habitController = require('../../../controllers/habit')
-const Habit = require('../../../model/Habit');
+const habitController = require('api/controllers/habit.js')
+const Habit = require('api/model/Habit.js');
 
 const mockSend = jest.fn();
 const mockJson = jest.fn();
 const mockStatus = jest.fn(code => ({ send: mockSend, json: mockJson, end: jest.fn() }))
 const mockRes = { status: mockStatus }
 
+const db = require('../../integrations/config')
+
 describe('habit controller', () => {
+
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
     beforeEach(() =>  jest.clearAllMocks());
 
     afterAll(() => jest.resetAllMocks());
@@ -47,7 +54,7 @@ describe('habit controller', () => {
 
     describe('create', ()=>{
         test('returns with 201 on creating a new habit ', async ()=>{
-            jest.spyOn(Habit, 'createHabit')
+            jest.spyOn(Habit, 'habitController.create')
                 .mockResolvedValue({})
             const mockReq = {params:{username:'mark'}, body: {}}
             await habitController.create(mockReq,mockRes)

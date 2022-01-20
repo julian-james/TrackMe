@@ -1,19 +1,29 @@
+const createHabitForm = document.querySelector('#create_habit_form');
+const habitsList = document.querySelector('#feed');
 
 function renderHomepage(){
     const logo = document.createElement('img');
     logo.id = 'logo';
-    logo.src = 'https://res.cloudinary.com/getfutureproof/image/upload/v1595323029/futureproof_logotype_withBleed_huge_kl2rol.png';
+    // logo.src = 'https://user-images.githubusercontent.com/79319621/150428551-2fa8e0f6-f00e-4f75-93c1-d782a39a1a57.png';
+    logo.src = 'https://user-images.githubusercontent.com/79319621/150434280-1ecb8603-b4fd-4da4-baba-99cfcd543ff0.png';
     logo.alt = 'futureproof logo'
     main.appendChild(logo);
+    logo.classList.add('logo')
 }
+
 
 
 function renderLoginForm() {
     const fields = [
-        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email' } },
-        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password' } },
-        { tag: 'input', attributes: { type: 'submit', value: 'Login' } }
+        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email', class:'form-control' } },
+        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password',  class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'submit', value: 'Login', class:'btn btn-primary' } }
     ]
+    const logo = document.createElement('img');
+    logo.src = 'https://user-images.githubusercontent.com/79319621/150429519-ba3ef24d-8a95-4e00-9de1-e87628ad7ac7.png';
+    logo.alt = 'futureproof logo'
+    logo.classList.add("logo2")
+    main.appendChild(logo);
     const form = document.createElement('form');
     fields.forEach(f => {
         let field = document.createElement(f.tag);
@@ -24,16 +34,21 @@ function renderLoginForm() {
     })
     form.addEventListener('submit', requestLogin)
     main.appendChild(form);
-}
+} 
 
 function renderRegisterForm() {
     const fields = [
-        { tag: 'input', attributes: { type: 'text', name: 'username', placeholder: 'Username' } },
-        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email' } },
-        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password' } },
-        { tag: 'input', attributes: { type: 'password', name: 'passwordConfirmation', placeholder: 'Confirm Password' } },
-        { tag: 'input', attributes: { type: 'submit', value: 'Create Account' } }
+        { tag: 'input', attributes: { type: 'text', name: 'username', placeholder: 'Username', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'password', name: 'passwordConfirmation', placeholder: 'Confirm Password', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'submit', value: 'Create Account', class:'btn btn-primary' } }
     ]
+    const logo = document.createElement('img');
+    logo.src = 'https://user-images.githubusercontent.com/79319621/150429519-ba3ef24d-8a95-4e00-9de1-e87628ad7ac7.png';
+    logo.alt = 'futureproof logo'
+    logo.classList.add("logo2")
+    main.appendChild(logo);
     const form = document.createElement('form');
     fields.forEach(f => {
         let field = document.createElement(f.tag);
@@ -113,6 +128,14 @@ async function renderFeed() {
     submitBtn.addEventListener("click", addNewHabit)
 
     addHabitDiv.classList.add("addHabitDiv")
+    habitNameInput.classList.add("form-control")
+    frequencyInput.classList.add("form-control")
+    submitBtn.classList.add("btn")
+
+    habitNameInput.setAttribute("placeholder", "Name your habit...")
+    frequencyInput.setAttribute("placeholder", "Set your frequency...")
+
+    main.appendChild(addHabitDiv)
     addHabitDiv.appendChild(addHabitForm)
     
     addHabitForm.appendChild(habitNameInput)
@@ -130,6 +153,7 @@ async function renderFeed() {
     addHabitBtn.classList.add("addHabitBtn")
 
     addHabitBtn.addEventListener("click", showAddHabitForm)
+    addHabitBtn.classList.add('button-53')
 
     // habit section
     const renderHabit = habitData => {
@@ -148,14 +172,16 @@ async function renderFeed() {
         const inner = document.createElement("div")
         progressBarDiv.classList.add('progressBarDiv')
         outer.classList.add("outer")
+        outer.setAttribute("id", "progress-outer")
       
         let frequency = habitData.Frequency
         let progress = habitData.Progress  
         
         // console.log(`(${(progress/frequency)*360})`)
-        outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
-        
+        // outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
+        outer.style.background =  `conic-gradient(#000000 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
 
+        HabitDiv.classList.add("habit-div")
         ProgressBtn.setAttribute("id", id)
         deleteBtn.setAttribute("id", id)
         inner.setAttribute("id", "inner")
@@ -221,3 +247,119 @@ function render404() {
     error.textContent = "Oops, we can't find that page sorry!";
     main.appendChild(error);
 }
+
+// async function createNewHabit(e) {
+//     e.preventDefault();
+//     try {
+//         const options = {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+//         }
+//         const r = await fetch(`http://localhost:3000/habits`, options)
+//         const data = await r.text()/*json()*/
+//         console.log(data)
+//         // if (data.err){ throw Error(data.err) }
+//         // requestLogin(e);
+
+//     } catch (err) {
+//         console.warn(err);
+//     }
+// }
+
+
+
+
+
+
+
+
+
+async function createNewHabit(e){
+    e.preventDefault();
+
+        const habitData = {
+            HabitName: e.target.habit_input.value,
+            Frequency: 0,
+            Goal: false,
+            Progress: 0,
+            Streak: 0
+        };
+    
+        const options = { 
+            method: 'POST',
+            body: JSON.stringify(habitData),
+            headers: { "Content-Type": "application/json" }
+        };
+    
+        await fetch('http://localhost:3000/habits', options)
+            .then(r => r.json())
+            .then(appendHabit)
+            .then(() => e.target.reset())
+            .catch(console.warn)
+};
+
+function appendHabit(habitData){
+    const div = document.createElement('div');
+    div.className = 'post';
+    const habitLi = formatHabitDiv(habitData, div)
+    habitsList.append(div);
+};
+
+function formatHabitDiv(habit, div){
+    const frequency = document.createElement('p');
+    const goal = document.createElement('p');
+    const habitName = document.createElement('p');
+    const progress = document.createElement('p');
+    const streak = document.createElement('p');
+
+    // const delBtn = document.createElement('button');
+    // const uptBtn = document.createElement('button');
+    // delBtn.setAttribute('class', 'delete')
+    // uptBtn.setAttribute('class', 'update')
+    // delBtn.textContent = 'X';
+    // uptBtn.textContent = '+';
+    // delBtn.onclick = () => deleteDog(habit.id, div);
+    // uptBtn.onclick = () => updateDog(habit.id, div);
+    // delTd.append(delBtn);
+    // uptTd.append(uptBtn);
+
+    frequency.textContent = `Frequency: ${habit.Frequency}`;
+    goal.textContent = `Goal: ${habit.Goal}`;
+    habitName.textContent = `Habit: ${habit.HabitName}`;
+    progress.textContent = `Progress: ${habit.Progress}`;
+    streak.textContent = `Streak: ${habit.Streak}`;
+
+    div.append(frequency)
+    div.append(goal)
+    div.append(habitName)
+    div.append(progress)
+    div.append(streak)
+
+    return div
+}
+
+
+
+
+// async function createNewHabit2(e) {
+//     e.preventDefault();
+//     try {
+//         const options = {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+//         }
+//         const r = await fetch(`http://localhost:3000/habits`, options)
+//         const data = await r.text()/*json()*/
+//         if (data.err){ throw Error(data.err) }
+//         // requestLogin(e);
+//     } catch (err) {
+//         console.warn(err);
+//     }
+// }
+
+
+
+
+// createHabitForm.addEventListener('submit', createNewHabit);

@@ -1,15 +1,22 @@
 const userController = require('../../../controllers/user')
-const User = require('../../../model/User');
+const User = require('api/model/User.js');
 
 const mockSend = jest.fn();
 const mockJson = jest.fn();
 const mockStatus = jest.fn(code => ({ send: mockSend, json: mockJson }))
 const mockRes = { status: mockStatus }
 
-const db = require('../../../db/db');
+// const db = require('../../../db/db');
+const db = require('../../integrations/config')
+
 const bcrypt = require('bcryptjs');
 
 describe('users controller', () => {
+
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
     beforeEach(() =>  jest.clearAllMocks());
 
     afterAll(() => jest.resetAllMocks());

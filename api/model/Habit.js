@@ -22,7 +22,8 @@ const habitSchema = new mongoose.Schema({
     Progress: {
         type: Number,
         default: 0
-    }
+    },
+    
 }, {collection: "habits"});
 
  const Habit = mongoose.model('habit', habitSchema)
