@@ -56,8 +56,7 @@ async function addProgress(e) {
 
     }
     await fetch(`http://localhost:3000/habits/${e.target.id}/progress`, options)
-    location.reload();
-
+    location.reload()
 }
 
 // add habit render form
@@ -89,7 +88,7 @@ async function deleteHabit(e) {
         method: "DELETE"
     }
     await fetch(`http://localhost:3000/habits/${e.target.id}`, options)
-    location.reload();
+    location.reload()
 }
 
 async function renderFeed() {
@@ -143,7 +142,7 @@ async function renderFeed() {
         let frequency = habitData.Frequency
         let progress = habitData.Progress  
         
-        console.log(`(${(progress/frequency)*360})`)
+        // console.log(`(${(progress/frequency)*360})`)
         outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
         
 
@@ -160,9 +159,10 @@ async function renderFeed() {
         // habit tracking goal 
         if(habitData.Frequency - habitData.Progress > 0) {
             habitGoal.textContent = `You have to do ${habitData.Frequency - habitData.Progress} more!`
+            inner.textContent = `${Math.round(progress/frequency * 100)}%`
         } else if(habitData.Frequency - habitData.Progress == 0) {
             habitGoal.textContent = "You have completed your task for the day!"
-            inner.textContent = `${progress/frequency * 100}%`
+            inner.textContent = `100%`
         } else {
             habitGoal.textContent = `You have done ${habitData.Progress - habitData.Frequency} more than your goal for the day! Good Job :)`
             inner.textContent = `100%`

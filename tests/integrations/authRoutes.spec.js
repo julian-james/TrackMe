@@ -46,3 +46,4 @@ describe('auth endpoints' , () => {
         expect(res.statusCode).toBe(200)
     })
 } )
+
