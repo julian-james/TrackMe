@@ -100,8 +100,7 @@ async function renderFeed() {
     const habitNameInput = document.createElement("input")
     const frequencyInput = document.createElement("input")
     const submitBtn = document.createElement("button")
-
-
+    
     submitBtn.addEventListener("click", addNewHabit)
 
     addHabitDiv.classList.add("addHabitDiv")
@@ -128,18 +127,33 @@ async function renderFeed() {
         const HabitStreak = document.createElement("h2")
         const ProgressBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
+        const progressNumber = document.createElement("p")
+        const habitGoal = document.createElement("h3")
         ProgressBtn.setAttribute("id", id)
         deleteBtn.setAttribute("id", id)
 
         name.textContent = habitData.HabitName
         HabitStreak.textContent = habitData.Streak
         ProgressBtn.textContent = "+"
-        deleteBtn.textContent = "x"
+        deleteBtn.textContent = "Complete Habit"
+        progressNumber.textContent = habitData.Progress
+       
+        // habit tracking goal 
+        if(habitData.Frequency - habitData.Progress > 0) {
+            habitGoal.textContent = `You have to do ${habitData.Frequency - habitData.Progress} more!`
+        } else if(habitData.Frequency - habitData.Progress == 0) {
+            habitGoal.textContent = "You have completed your task for the day!"
+        } else {
+            habitGoal.textContent = `You have done ${habitData.Progress - habitData.Frequency} more than your goal for the day!`
+        }
+            
         
         HabitDiv.appendChild(name)
+        HabitDiv.appendChild(habitGoal)
         HabitDiv.appendChild(HabitStreak)
         HabitDiv.appendChild(ProgressBtn)
         HabitDiv.appendChild(deleteBtn)
+        ProgressBtn.appendChild(progressNumber)
         feed.appendChild(HabitDiv)
 
         ProgressBtn.addEventListener("click", addProgress)
