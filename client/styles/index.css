@@ -1,6 +1,9 @@
 
-/* Div for add habit button */
-/* .addHabitDiv {
+.addHabitBtn {
+    
+}
+
+.addHabitDiv {
     background: none;
     display: flex;
     justify-content: center;
@@ -8,7 +11,12 @@
     border-bottom: 1px solid black;
     transform: translateY(-100vh);
     z-index: -10;
-} */
+}
+
+.moveHabitDiv {
+    transform: translateY(0vh);
+    z-index:1;
+}
 
 .progressBarDiv {
     width: 160px;

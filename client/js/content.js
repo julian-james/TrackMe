@@ -1,3 +1,4 @@
+const e = require("express");
 
 
 function renderHomepage(){
@@ -90,6 +91,7 @@ async function deleteHabit(e) {
     location.reload()
 }
 
+
 async function renderFeed() {
     const feed = document.createElement('section');
     feed.id = 'feed';
@@ -105,8 +107,9 @@ async function renderFeed() {
     submitBtn.addEventListener("click", addNewHabit)
 
     addHabitDiv.classList.add("addHabitDiv")
-    main.appendChild(addHabitDiv)
+    
     addHabitDiv.appendChild(addHabitForm)
+    
     addHabitForm.appendChild(habitNameInput)
     addHabitForm.appendChild(frequencyInput)
     addHabitForm.appendChild(submitBtn)
@@ -116,8 +119,12 @@ async function renderFeed() {
     const addHabitBtn = document.createElement("button")
     BtnDiv.appendChild(addHabitBtn)
     main.appendChild(BtnDiv)
+    main.appendChild(addHabitDiv)
     addHabitBtn.textContent= "Add Habit"
     submitBtn.textContent= "Submit new habit"
+    addHabitBtn.classList.add("addHabitBtn")
+
+    addHabitBtn.addEventListener("click", showAddHabitForm)
 
     // habit section
     const renderHabit = habitData => {
@@ -190,7 +197,10 @@ async function renderFeed() {
     
 }
 
-
+async function showAddHabitForm() {
+    const div = document.querySelector(".addHabitDiv")
+    div.classList.toggle("moveHabitDiv")
+}
 
 function renderProfile() {
     const profile = document.createElement('section');
