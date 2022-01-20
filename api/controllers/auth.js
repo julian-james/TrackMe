@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const { registerValidation, loginValidation } = require('../validation');
 
+
 async function registerUser(req, res) {
 
     //LETS VALIDATE THE DATA BEFORE WE MAKE A USER
