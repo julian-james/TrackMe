@@ -129,30 +129,50 @@ async function renderFeed() {
         const deleteBtn = document.createElement("button")
         const progressNumber = document.createElement("p")
         const habitGoal = document.createElement("h3")
+
+        // circuluar progress bar
+        const progressBarDiv = document.createElement("div")
+        const outer = document.createElement("div")
+        const inner = document.createElement("div")
+        progressBarDiv.classList.add('progressBarDiv')
+        outer.classList.add("outer")
+      
+        let frequency = habitData.Frequency
+        let progress = habitData.Progress  
+        
+        console.log(`(${(progress/frequency)*360})`)
+        outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
+        
+
         ProgressBtn.setAttribute("id", id)
         deleteBtn.setAttribute("id", id)
-
+        inner.setAttribute("id", "inner")
+      
         name.textContent = habitData.HabitName
         HabitStreak.textContent = habitData.Streak
         ProgressBtn.textContent = "+"
-        deleteBtn.textContent = "Complete Habit"
+        deleteBtn.textContent = "x"
         progressNumber.textContent = habitData.Progress
-       
+      
         // habit tracking goal 
         if(habitData.Frequency - habitData.Progress > 0) {
             habitGoal.textContent = `You have to do ${habitData.Frequency - habitData.Progress} more!`
         } else if(habitData.Frequency - habitData.Progress == 0) {
             habitGoal.textContent = "You have completed your task for the day!"
+            inner.textContent = `${progress/frequency * 100}%`
         } else {
-            habitGoal.textContent = `You have done ${habitData.Progress - habitData.Frequency} more than your goal for the day!`
+            habitGoal.textContent = `You have done ${habitData.Progress - habitData.Frequency} more than your goal for the day! Good Job :)`
+            inner.textContent = `100%`
         }
             
-        
         HabitDiv.appendChild(name)
         HabitDiv.appendChild(habitGoal)
         HabitDiv.appendChild(HabitStreak)
         HabitDiv.appendChild(ProgressBtn)
         HabitDiv.appendChild(deleteBtn)
+        HabitDiv.appendChild(progressBarDiv)
+        progressBarDiv.appendChild(outer)
+        outer.appendChild(inner)
         ProgressBtn.appendChild(progressNumber)
         feed.appendChild(HabitDiv)
 
