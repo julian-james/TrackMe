@@ -2,7 +2,7 @@ const request = require('supertest');
 const fs = require("fs");
 const { Pool, Mongoose } = require('mongoose');
 const mongoose = require('mongoose');
-const app = require('../../index.js');
+const app = require('api/index.js');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 const mongod = new MongoMemoryServer();
@@ -34,6 +34,14 @@ module.exports.clearDatabase = async () => {
     }
 }
 
+exports.setTimeout = function() {
+    return global.setTimeout.apply(global, arguments);
+  };
+
+module.exports = {
+    testEnvironment: 'node'
+  };
+
 // const testSeed = fs.readFileSync(__dirname + '/test_seeds.sql').toString();
 
 const resetTestDB = () => {
@@ -51,4 +59,4 @@ const resetTestDB = () => {
 global.request = request;
 global.app = app;
 global.resetTestDB = resetTestDB;
-global.port = process.env.PORT || 3000;
+global.port = process.env.PORT || 5000;

@@ -28,30 +28,35 @@ const testUser2 = {
 }
 
 describe('Habit', () =>{
-    beforeAll(async () => {
-        await mongoose.connect(databaseUrl, { useNewUrlParser: true });
-      });
 
-    beforeEach(() => jest.clearAllMocks())
-    
-    afterEach(async () => {
-        await User.deleteMany();
-      });
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
 
-    afterAll(() => jest.resetAllMocks())
-
-    // it("Should save user to database", async done => {
-    //     const res = await request.post("/register").send({
-    //       name: "Zella Zingly",
-    //       email: "testing@email.com",
-    //       password: "asdfgh"
-    //     });
-      
-    //     // Searches the user in the database
-    //     const user = await User.findOne({ email: "testing@gmail.com" });
-      
-    //     done();
+    // beforeAll(async () => {
+    //     await mongoose.connect(databaseUrl, { useNewUrlParser: true });
     //   });
+
+    // beforeEach(() => jest.clearAllMocks())
+    
+    // afterEach(async () => {
+    //     await User.deleteMany();
+    //   });
+
+    // afterAll(() => jest.resetAllMocks())
+
+    // // it("Should save user to database", async done => {
+    // //     const res = await request.post("/register").send({
+    // //       name: "Zella Zingly",
+    // //       email: "testing@email.com",
+    // //       password: "asdfgh"
+    // //     });
+      
+    // //     // Searches the user in the database
+    // //     const user = await User.findOne({ email: "testing@gmail.com" });
+      
+    // //     done();
+    // //   });
 
     it("Should save user to database", async done => {
         // Sends request...

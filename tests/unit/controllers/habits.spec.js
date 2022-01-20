@@ -9,6 +9,11 @@ const mockRes = { status: mockStatus }
 const db = require('../../integrations/config')
 
 describe('habit controller', () => {
+
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
     beforeEach(() =>  jest.clearAllMocks());
 
     afterAll(() => jest.resetAllMocks());

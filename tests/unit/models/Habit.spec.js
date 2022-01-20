@@ -44,13 +44,17 @@ const habits = [
 
 describe('Habit', () =>{
 
-    beforeAll(async () => {
-        await mongoose.connect(databaseUrl, { useNewUrlParser: true });
-      });
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
 
-    beforeEach(() => jest.clearAllMocks())
+    // beforeAll(async () => {
+    //     await mongoose.connect(databaseUrl, { useNewUrlParser: true });
+    //   });
+
+    // beforeEach(() => jest.clearAllMocks())
     
-    afterAll(() => jest.resetAllMocks())
+    // afterAll(() => jest.resetAllMocks())
 
     describe('all', ()=>{
         test('resolves with habits on successful db query', async () =>{

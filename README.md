@@ -3,6 +3,7 @@ npm i @hapi/joi
 npm i dotenv
 npm i mongodb-memory-server
 npm i bcryptjs
+npm i request
 
 
 

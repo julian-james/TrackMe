@@ -1,6 +1,7 @@
 const request = require('supertest')
 const auth = require('api/routes/verifyToken.js');
 const app = require('api/index.js')
+const db = require('./config')
 
 describe('habit endpoints', ()=>{
     let api;
@@ -12,18 +13,22 @@ describe('habit endpoints', ()=>{
         Progress: 0
     }
 
-    beforeEach(async () => {
-        await resetTestDB()
-    });
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
+    // beforeEach(async () => {
+    //     await resetTestDB()
+    // });
 
     beforeAll(async () => {
-        api = app.listen(3000, () => console.log('Test server running on port 5000'))
+        api = app.listen(5000, () => console.log('Test server running on port 5000'))
     });
 
-    afterAll(async () => {
-        console.log('Gracefully stopping test server')
-        await api.close()
-    })
+    // afterAll(async () => {
+    //     console.log('Gracefully stopping test server')
+    //     await api.close()
+    // })
     
     it('responds to get / with status 200', (done) => {
         request(api).get('/').expect(200, done);

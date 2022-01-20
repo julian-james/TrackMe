@@ -6,6 +6,7 @@ const privateRoutes = ['#feed', '#profile'];
 
 window.addEventListener('hashchange', updateContent);
 
+
 function updateNav(){
     nav.innerHTML = '';
     let links;

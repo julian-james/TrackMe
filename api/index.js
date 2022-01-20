@@ -41,7 +41,9 @@ app.get("/", (req, res) => {
 })
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log('server up and running'));
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, () => console.log('server up and running'));
+}
 
 
 module.exports = app;

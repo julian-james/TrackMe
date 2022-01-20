@@ -12,6 +12,11 @@ const db = require('../../integrations/config')
 const bcrypt = require('bcryptjs');
 
 describe('users controller', () => {
+
+    beforeAll(async () => await db.connect())
+    afterEach(async () => await db.clearDatabase())
+    afterAll(async () => await db.closeDatabase())
+
     beforeEach(() =>  jest.clearAllMocks());
 
     afterAll(() => jest.resetAllMocks());

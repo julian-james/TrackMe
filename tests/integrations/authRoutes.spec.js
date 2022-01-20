@@ -4,9 +4,9 @@ const db = require('./config')
 
 describe('auth endpoints' , () => {
 
-    // beforeAll(async () => {
-    //     api = app.listen(3000, () => console.log('Test server running on port 5000'))
-    // });
+    beforeAll(async () => {
+        api = app.listen(5000, () => console.log('Test server running on port 5000'))
+    });
 
     // afterAll(async () => {
     //     console.log('Gracefully stopping test server')
