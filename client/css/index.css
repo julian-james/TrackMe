@@ -1,32 +1,52 @@
-* { box-sizing: border-box; }
+/* <body> index.html & index2.html & index3.html*/
 
-body {
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #3b5998;
+@media only screen and (max-width: 767px) {
+    .about-text {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+  }
+
+/* BACKGROUND PICTURE */
+body {    
+    margin-top: 80px;
+    padding: 30px;
+    height: 125vh;
+    background-image: url('https://codetheweb.blog/assets/img/posts/style-a-navigation-bar-css/background.jpg');
+    background-size: cover;
+    font-family:'BohrDonni',Verdana, Geneva, Tahoma, sans-serif;
+    color: hsl(0, 0%, 1%);
     font-weight: bold;
+    text-align: center;
+
+} 
+
+#home {
+  text-align: center;
+  size: 200%;
 }
 
-nav {
-    position: static;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding: 30px 75px;
-    background-color: #3b5998;
-    color: white;
+h1{
+    font-family: 'BohrDonni', sans-serif;
+    font-size: 1rem;
+    font-weight: 100;
+    text-align: center;
+    padding: 50px;
 }
 
+/* from content.js 2 CONST*/
 #logo { width: 100%; }
+
 
 a { text-decoration: none; }
 
+/* from layout.js 45*/ */
 nav a {
     color: white;
     padding: 0 10px;
 }
 
+/* from layout.js 9*/
 nav button, input[type='submit'] { 
     border: none;
     color: white;
@@ -36,11 +56,6 @@ nav button, input[type='submit'] {
     padding: 0;
 }
 
-#feed {
-    width: 50%;
-    margin: 20px auto;
-}
-
 .post {
     border: 1px solid #3b5998;
     text-align: justify;
@@ -48,6 +63,7 @@ nav button, input[type='submit'] {
     margin: 5px;
 }
 
+/* <form> 27 index.html & 27 index2.html & 9 content.js CONST*/
 form {
     display: flex;
     flex-direction: column;
@@ -56,19 +72,36 @@ form {
     width: 50%;
 }
 
+/* 30 <input> index.html & index2.html & content.js 2 CONST*/
 input {
     padding: 10px;
     margin: 5px;
 }
 
+/* where???????????????????????????????????????????? */
 .disabled {
     opacity: 0.3;
-}
+};
 
+/* from layout.js 4 */
 #login {
+    width: 100%;
+};
 
-}
-
+/* from layout.js 4 */
 #register {
+    width: 100%;
 
-}
+};
+
+/* from layout.js 5 & content.js 89 CONST*/
+#feed {
+    width: 50%;
+    margin: 20px auto;
+};
+
+/* from layout.js 5 */
+#profile {
+    width: 100%;
+
+};
