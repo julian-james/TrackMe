@@ -101,6 +101,7 @@ async function renderFeed() {
     const frequencyInput = document.createElement("input")
     const submitBtn = document.createElement("button")
 
+
     submitBtn.addEventListener("click", addNewHabit)
 
     addHabitDiv.classList.add("addHabitDiv")
@@ -116,6 +117,7 @@ async function renderFeed() {
     BtnDiv.appendChild(addHabitBtn)
     main.appendChild(BtnDiv)
     addHabitBtn.textContent= "Add Habit"
+    submitBtn.textContent= "Submit new habit"
 
     // habit section
     const renderHabit = habitData => {
