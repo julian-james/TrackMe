@@ -1,34 +1,61 @@
+:root {
+    --main-color: #2b2c3e;
+    --sec-color: #949ebb;
+    --thir-color: #4f3e37;
+    --4-color: #131317;
+    --back-color: #d7ddea;
+    --nav: #CF5E74;
+    --card-color: #afccc7;
+    --card2-color: #a9d8dd;
+
+  }
+
 body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     color: #3b5998;
     font-weight: bold;
+    background-color: var(--main-color);
+    font-family: 'Indie Flower', cursive;
+}
+
+#main {
+
 }
 
 nav {
     position: static;
     top: -10px;
-    width: 86%;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 30px 75px;
-    background-color: #3b5998;
+    padding: 15px 75px;
+    background-color: var(--nav);
     color: white;
 }
 
-#logo { width: 100%; }
+/* #logo { width: 100%; } */
+.logo {
+    /* max-height: 1000rem; */
+}
+
+.logo2 {
+    max-height: 350px;
+}
 
 a { text-decoration: none; }
 
 nav a {
     color: white;
     padding: 0 10px;
+    font-size: 20px;
 }
 
-nav button, input[type='submit'] { 
+nav button/*, input[type='submit']*/ { 
     border: none;
     color: white;
-    background: #3b5998;
+    /* background: #3b5998; */
+    background: var(--nav);
     font-weight: inherit;
     font-size: inherit;
     padding: 0;
@@ -69,4 +96,22 @@ input {
 
 #register {
 
+}
+
+.btn {
+    background-color: var(--thir-color) !important;
+    color: white;
+    border-color: var(--4-color);
+    margin: 0 -5px 0 4px;
+}
+
+.habit-div {
+    background-color: var(--card2-color);
+    border-radius: 20px;
+    border: 1px solid var(--4-color);
+    color: white;
+    margin: 10px 0;
+    height: 300px;
+    color: var(--4-color);
+    padding: 20px 0 0 0;
 }

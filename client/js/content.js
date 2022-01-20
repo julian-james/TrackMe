@@ -4,18 +4,26 @@ const habitsList = document.querySelector('#feed');
 function renderHomepage(){
     const logo = document.createElement('img');
     logo.id = 'logo';
-    logo.src = 'https://res.cloudinary.com/getfutureproof/image/upload/v1595323029/futureproof_logotype_withBleed_huge_kl2rol.png';
+    // logo.src = 'https://user-images.githubusercontent.com/79319621/150428551-2fa8e0f6-f00e-4f75-93c1-d782a39a1a57.png';
+    logo.src = 'https://user-images.githubusercontent.com/79319621/150434280-1ecb8603-b4fd-4da4-baba-99cfcd543ff0.png';
     logo.alt = 'futureproof logo'
     main.appendChild(logo);
+    logo.classList.add('logo')
 }
+
 
 
 function renderLoginForm() {
     const fields = [
-        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email' } },
-        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password' } },
-        { tag: 'input', attributes: { type: 'submit', value: 'Login' } }
+        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email', class:'form-control' } },
+        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password',  class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'submit', value: 'Login', class:'btn btn-primary' } }
     ]
+    const logo = document.createElement('img');
+    logo.src = 'https://user-images.githubusercontent.com/79319621/150429519-ba3ef24d-8a95-4e00-9de1-e87628ad7ac7.png';
+    logo.alt = 'futureproof logo'
+    logo.classList.add("logo2")
+    main.appendChild(logo);
     const form = document.createElement('form');
     fields.forEach(f => {
         let field = document.createElement(f.tag);
@@ -26,16 +34,21 @@ function renderLoginForm() {
     })
     form.addEventListener('submit', requestLogin)
     main.appendChild(form);
-}
+} 
 
 function renderRegisterForm() {
     const fields = [
-        { tag: 'input', attributes: { type: 'text', name: 'username', placeholder: 'Username' } },
-        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email' } },
-        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password' } },
-        { tag: 'input', attributes: { type: 'password', name: 'passwordConfirmation', placeholder: 'Confirm Password' } },
-        { tag: 'input', attributes: { type: 'submit', value: 'Create Account' } }
+        { tag: 'input', attributes: { type: 'text', name: 'username', placeholder: 'Username', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'email', name: 'email', placeholder: 'Email', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'password', name: 'password', placeholder: 'Password', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'password', name: 'passwordConfirmation', placeholder: 'Confirm Password', class:'form-control'  } },
+        { tag: 'input', attributes: { type: 'submit', value: 'Create Account', class:'btn btn-primary' } }
     ]
+    const logo = document.createElement('img');
+    logo.src = 'https://user-images.githubusercontent.com/79319621/150429519-ba3ef24d-8a95-4e00-9de1-e87628ad7ac7.png';
+    logo.alt = 'futureproof logo'
+    logo.classList.add("logo2")
+    main.appendChild(logo);
     const form = document.createElement('form');
     fields.forEach(f => {
         let field = document.createElement(f.tag);
@@ -106,6 +119,13 @@ async function renderFeed() {
     submitBtn.addEventListener("click", addNewHabit)
 
     addHabitDiv.classList.add("addHabitDiv")
+    habitNameInput.classList.add("form-control")
+    frequencyInput.classList.add("form-control")
+    submitBtn.classList.add("btn")
+
+    habitNameInput.setAttribute("placeholder", "Name your habit...")
+    frequencyInput.setAttribute("placeholder", "Set your frequency...")
+
     main.appendChild(addHabitDiv)
     addHabitDiv.appendChild(addHabitForm)
     addHabitForm.appendChild(habitNameInput)
@@ -138,14 +158,16 @@ async function renderFeed() {
         const inner = document.createElement("div")
         progressBarDiv.classList.add('progressBarDiv')
         outer.classList.add("outer")
+        outer.setAttribute("id", "progress-outer")
       
         let frequency = habitData.Frequency
         let progress = habitData.Progress  
         
         // console.log(`(${(progress/frequency)*360})`)
-        outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
-        
+        // outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
+        outer.style.background =  `conic-gradient(#000000 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
 
+        HabitDiv.classList.add("habit-div")
         ProgressBtn.setAttribute("id", id)
         deleteBtn.setAttribute("id", id)
         inner.setAttribute("id", "inner")
