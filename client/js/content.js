@@ -67,10 +67,7 @@ async function renderHabitForm() {
 async function addNewHabit(e) {
     const name = e.target.form[0].value
     const freq = e.target.form[1].value 
-    console.log(e)
-    console.log(name)
 
- 
         const options = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -82,6 +79,14 @@ async function addNewHabit(e) {
         await fetch("http://localhost:3000/habits", options)
     // find better way of reloading
     location.reload()
+}
+
+// delete habit
+async function deleteHabit(e) {
+    const options = {
+        method: "DELETE"
+    }
+    await fetch(`http://localhost:3000/habits/${e.target.id}`, options)
 }
 
 async function renderFeed() {
@@ -115,24 +120,30 @@ async function renderFeed() {
     // habit section
     const renderHabit = habitData => {
 
-        let counter = 0
         const id = habitData._id
         const HabitDiv = document.createElement("div")
         const name = document.createElement("h2")
         const HabitStreak = document.createElement("h2")
         const ProgressBtn = document.createElement("button")
+        const deleteBtn = document.createElement("button")
         ProgressBtn.setAttribute("id", id)
+        deleteBtn.setAttribute("id", id)
 
         name.textContent = habitData.HabitName
         HabitStreak.textContent = habitData.Streak
         ProgressBtn.textContent = "+"
+        deleteBtn.textContent = "x"
         
         HabitDiv.appendChild(name)
         HabitDiv.appendChild(HabitStreak)
         HabitDiv.appendChild(ProgressBtn)
+        HabitDiv.appendChild(deleteBtn)
         feed.appendChild(HabitDiv)
+
         ProgressBtn.addEventListener("click", addProgress)
         addHabitBtn.addEventListener("click", renderHabitForm)
+        deleteBtn.addEventListener("click", deleteHabit)
+
         console.log(id)
     }
 
