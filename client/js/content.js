@@ -1,14 +1,17 @@
+
+// to add Trackme logo
+
 const createHabitForm = document.querySelector('#create_habit_form');
 const habitsList = document.querySelector('#feed');
 
+
 function renderHomepage(){
-    const logo = document.createElement('img');
+    const logo = document.createElement('mp4');
     logo.id = 'logo';
-    logo.src = 'https://res.cloudinary.com/getfutureproof/image/upload/v1595323029/futureproof_logotype_withBleed_huge_kl2rol.png';
-    logo.alt = 'futureproof logo'
+    logo.src = '';
+    logo.alt = 'TRACKme app logo'
     main.appendChild(logo);
 }
-
 
 function renderLoginForm() {
     const fields = [
@@ -133,6 +136,9 @@ async function renderFeed() {
         const habitGoal = document.createElement("h3")
 
         // circuluar progress bar
+        // STYLED progressBarDiv
+        // STYLED outer
+        // STYLED inner
         const progressBarDiv = document.createElement("div")
         const outer = document.createElement("div")
         const inner = document.createElement("div")

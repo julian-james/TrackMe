@@ -10,6 +10,7 @@
     z-index: -10;
 } */
 
+/* from content.js */
 .progressBarDiv {
     width: 160px;
     height: 160px;
@@ -17,22 +18,23 @@
    
 }
 
+/* from content.js */
 .outer{
     height: 80%;
     width: 80%;
     border-radius: 50%;
-    
+
     padding: 20px;
     box-shadow:  6px 6px 10px -1px rgba(0,0,0,0.15),
                 -6px -6px 10px -1px rgba(255,255,255,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-   
-;
 
 }
 
+/* from content.js??? */
+/* where??? */
 .outer:before {
     content: "";
     position: absolute;
@@ -43,6 +45,7 @@
 
 }
 
+/* from content.js */
 #inner {
     color: black;
     z-index: 1

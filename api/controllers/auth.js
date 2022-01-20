@@ -47,7 +47,6 @@ async function registerUser2(req, res) {
 
 
 
-
     // LETS VALIDATE THE DATA BEFORE WE MAKE A USER
     // const validation = schema.validate(req.body)
     // res.send(validation);
@@ -76,6 +75,8 @@ async function registerUser2(req, res) {
     //     res.status(400).send(err);
     // }
 };
+
+
 
 async function registerUser(req, res) {
     try {
