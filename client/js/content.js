@@ -1,3 +1,5 @@
+
+
 function renderHomepage(){
     const logo = document.createElement('img');
     logo.id = 'logo';
@@ -45,10 +47,63 @@ function renderRegisterForm() {
     main.appendChild(form);
 }
 
+// add progress button function
+async function addProgress(e) {
+    
+    const options = {
+        method: "PATCH"
+
+    }
+    await fetch(`http://localhost:3000/habits/${e.target.id}/progress`, options)
+
+}
+
+// add habit render form
+async function renderHabitForm() {
+
+}
+
+// add new habit
+async function addNewHabit(e) {
+    const name = e.target.form[0].value
+    const freq = e.target.form[1].value 
+    console.log(e)
+    console.log(name)
+
+ 
+        const options = {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                HabitName: name,
+                Frequency: freq
+            })
+        }
+        await fetch("http://localhost:3000/habits", options)
+    // find better way of reloading
+    location.reload()
+}
+
 async function renderFeed() {
     const feed = document.createElement('section');
     feed.id = 'feed';
     const habits = await getAllHabits();
+
+    // add habit section
+    const addHabitDiv = document.createElement("div")
+    const addHabitForm = document.createElement("form")
+    const habitNameInput = document.createElement("input")
+    const frequencyInput = document.createElement("input")
+    const submitBtn = document.createElement("button")
+
+    submitBtn.addEventListener("click", addNewHabit)
+
+    addHabitDiv.classList.add("addHabitDiv")
+    main.appendChild(addHabitDiv)
+    addHabitDiv.appendChild(addHabitForm)
+    addHabitForm.appendChild(habitNameInput)
+    addHabitForm.appendChild(frequencyInput)
+    addHabitForm.appendChild(submitBtn)
 
     // add button section
     const BtnDiv = document.createElement("div")
@@ -60,22 +115,33 @@ async function renderFeed() {
     // habit section
     const renderHabit = habitData => {
 
+        let counter = 0
+        const id = habitData._id
         const HabitDiv = document.createElement("div")
         const name = document.createElement("h2")
         const HabitStreak = document.createElement("h2")
         const ProgressBtn = document.createElement("button")
+        ProgressBtn.setAttribute("id", id)
 
         name.textContent = habitData.HabitName
         HabitStreak.textContent = habitData.Streak
+        ProgressBtn.textContent = "+"
         
         HabitDiv.appendChild(name)
         HabitDiv.appendChild(HabitStreak)
         HabitDiv.appendChild(ProgressBtn)
         feed.appendChild(HabitDiv)
+        ProgressBtn.addEventListener("click", addProgress)
+        addHabitBtn.addEventListener("click", renderHabitForm)
+        console.log(id)
     }
+
     habits.forEach(renderHabit);
     main.appendChild(feed);
+    
 }
+
+
 
 function renderProfile() {
     const profile = document.createElement('section');

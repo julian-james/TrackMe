@@ -74,7 +74,7 @@ async function updateProgress(req, res) {
     try {
         const id = req.params.id
         const updatedProg = await Habit.findByIdAndUpdate(req.params.id, {$inc: {Progress: 1}})    
-        if (await updatedProg.Progress == updatedProg.Frequency) {
+        if (await updatedProg.Progress == updatedProg.Frequency - 1) {
             updating(id)
         }
         res.status(200).json(updatedProg)
