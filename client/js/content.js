@@ -68,7 +68,7 @@ async function addProgress(e) {
         method: "PATCH"
 
     }
-    await fetch(`http://localhost:3000/habits/${e.target.id}/progress`, options)
+    await fetch(`https://track-me-full-stack.herokuapp.com/habits/${e.target.id}/progress`, options)
     location.reload()
 }
 
@@ -94,7 +94,7 @@ async function addNewHabit(e) {
                 Frequency: freq
             })
         }
-        await fetch("http://localhost:3000/habits", options)
+        await fetch("https://track-me-full-stack.herokuapp.com/habits", options)
     // find better way of reloading
     location.reload()
 }
@@ -104,7 +104,7 @@ async function deleteHabit(e) {
     const options = {
         method: "DELETE"
     }
-    await fetch(`http://localhost:3000/habits/${e.target.id}`, options)
+    await fetch(`https://track-me-full-stack.herokuapp.com/habits/${e.target.id}`, options)
     location.reload()
 }
 
@@ -325,7 +325,7 @@ async function createNewHabit(e){
             headers: { "Content-Type": "application/json" }
         };
     
-        await fetch('http://localhost:3000/habits', options)
+        await fetch('https://track-me-full-stack.herokuapp.com/habits', options)
             .then(r => r.json())
             .then(appendHabit)
             .then(() => e.target.reset())
