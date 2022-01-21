@@ -18,8 +18,8 @@ describe('Creation habit', () => {
             "user_id": 1,
             "habitGoal": "have a drink",
             "HabitStreak": 1,
-            "frequency": 1
-            "progressNumber": 0,
+            "frequency": 1 ,
+            "progressNumber": 0
         }
         
     })
