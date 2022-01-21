@@ -86,9 +86,9 @@ async function updateProgress(req, res) {
 // updating the streak
 async function updating(id) {
     // This updates the streak when frequency meets progress.
-    result = await request.patch(`http://localhost:3000/habits/${id}/streak`)
+    result = await request.patch(`https://track-me-full-stack.herokuapp.com/habits/${id}/streak`)
     // goal is false by default, when frequency is = progress, goal is completed for the day.
-    resultComplete = await request.patch(`http://localhost:3000/habits/${id}/goal`)
+    resultComplete = await request.patch(`https://track-me-full-stack.herokuapp.com/habits/${id}/goal`)
 }
 
 // Every time at 59 seconds, runs resetProgress
@@ -100,7 +100,7 @@ schedule.scheduleJob("59 * * * * *", () => {
 async function resetProgress() {
     // check if goal is true for all habits, if goal is false, reset streak + progress to 0 and goal to false. If goal is true, reset progress + goal/
     // loop through each function
-    result = await axios.get("http://localhost:3000/habits")
+    result = await axios.get("https://track-me-full-stack.herokuapp.com/habits")
     data = result.data
     data.forEach(async habit => {
         const id = habit._id

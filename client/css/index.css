@@ -172,6 +172,10 @@ input {
 
 }
 
+/* #logout input {
+    font-family: Arial, Helvetica, sans-serif;
+} */
+
 
 @media only screen and (max-width: 767px), screen and (max-height: 700px) {
     .about-text {

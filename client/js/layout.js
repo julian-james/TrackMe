@@ -16,6 +16,7 @@ function updateNav(){
         logoutBtn = document.createElement('button');
         logoutBtn.textContent = 'Logout';
         logoutBtn.onclick = logout;
+        logoutBtn.style.fontFamily = 'Arial, Helvetica, sans-serif'
         nav.appendChild(logoutBtn);
     } else {
         links = publicRoutes.map(createNavLink);
