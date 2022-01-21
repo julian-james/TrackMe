@@ -110,3 +110,15 @@
 .ProgressBtn:hover {
     cursor: pointer;
 }
+
+.deleteAddHbtBtn {
+    border-radius: 49%;
+    font-size: 30px;
+    color: white;
+    background: transparent;
+    border: none;
+}
+
+.deleteAddHbtBtn:hover {
+    cursor: pointer;
+}

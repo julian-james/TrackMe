@@ -136,10 +136,12 @@ async function renderFeed() {
     habitNameInput.setAttribute("placeholder", "Name your habit...")
     frequencyInput.setAttribute("placeholder", "Set your frequency...")
 
-    main.appendChild(addHabitDiv)
-    addHabitDiv.appendChild(deleteAddHbtBtn)
+    deleteAddHbtBtn.textContent = "x"
+    main.appendChild(addHabitDiv) 
     addHabitDiv.appendChild(addHabitForm)
+    addHabitDiv.appendChild(deleteAddHbtBtn)
 
+    deleteAddHbtBtn.classList.add("deleteAddHbtBtn")
     deleteAddHbtBtn.addEventListener("click", showAddHabitForm)
     
     addHabitForm.appendChild(habitNameInput)
