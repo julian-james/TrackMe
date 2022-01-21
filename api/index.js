@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express'); 
 const app = express(); 
 const cors = require('cors');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 // Added this line to try and overcome terminal error
@@ -18,7 +18,7 @@ app.use(cors('*'));
 const authRoute = require('./routes/auth');
 const habitRoute = require('./routes/habits')
 
-dotenv.config();
+// dotenv.config();
 
 // Connect to DB
 mongoose.connect(
