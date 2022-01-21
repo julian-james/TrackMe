@@ -17,6 +17,8 @@ body {
     font-weight: bold;
     background-color: var(--main-color);
     font-family: 'Indie Flower', cursive;
+    max-width: 100%;
+    margin: 0;
 }
 
 #main {
@@ -29,7 +31,8 @@ nav {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 15px 75px;
+    padding: 15px 0;
+    margin: 0;
     background-color: var(--nav);
     color: white;
 }
@@ -58,12 +61,13 @@ nav button/*, input[type='submit']*/ {
     background: var(--nav);
     font-weight: inherit;
     font-size: inherit;
-    padding: 0;
+    padding: 5px 25px;
 }
 
 #feed {
     width: 50%;
     margin: 20px auto;
+    margin-top: -200px;
 }
 
 .post {
@@ -139,15 +143,15 @@ input {
     content: '';
     position: absolute;
     border: 1px solid #000000;
-    bottom: 4px;
-    left: 4px;
+    bottom: 0px;
+    left: 0px;
     width: calc(100% - 1px);
     height: calc(100% - 1px);
   }
   
   .button-53:hover:after {
-    bottom: 2px;
-    left: 2px;
+    bottom: 1px;
+    left: 1px;
   }
   
   @media (min-width: 768px) {
@@ -163,9 +167,9 @@ input {
     border: 1px solid var(--4-color);
     color: white;
     margin: 10px 0;
-    height: 300px;
     color: var(--4-color);
-    padding: 20px 0 0 0;
+    display: flex;
+
 }
 
 

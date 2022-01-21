@@ -120,6 +120,7 @@ async function renderFeed() {
     const habitNameInput = document.createElement("input")
     const frequencyInput = document.createElement("input")
     const submitBtn = document.createElement("button")
+    const deleteAddHbtBtn = document.createElement("button")
     frequencyInput.setAttribute("type", "number")
     frequencyInput.setAttribute("value", "1")
     habitNameInput.classList.add("habitNameInput")
@@ -136,7 +137,10 @@ async function renderFeed() {
     frequencyInput.setAttribute("placeholder", "Set your frequency...")
 
     main.appendChild(addHabitDiv)
+    addHabitDiv.appendChild(deleteAddHbtBtn)
     addHabitDiv.appendChild(addHabitForm)
+
+    deleteAddHbtBtn.addEventListener("click", showAddHabitForm)
     
     addHabitForm.appendChild(habitNameInput)
     addHabitForm.appendChild(frequencyInput)
@@ -151,6 +155,7 @@ async function renderFeed() {
     addHabitBtn.textContent= "Add Habit"
     submitBtn.textContent= "Submit new habit"
     addHabitBtn.classList.add("addHabitBtn")
+ 
 
     addHabitBtn.addEventListener("click", showAddHabitForm)
     addHabitBtn.classList.add('button-53')
@@ -160,12 +165,24 @@ async function renderFeed() {
 
         const id = habitData._id
         const HabitDiv = document.createElement("div")
-        const name = document.createElement("h2")
+        const HabitLeftUpperDiv = document.createElement("div")
+        const HabitLeftLowerDiv = document.createElement("div")
+        const HabitLeftDiv = document.createElement("div")
+        const HabitRightDiv = document.createElement("div")
+        const name = document.createElement("h1")
         const HabitStreak = document.createElement("h2")
         const ProgressBtn = document.createElement("button")
         const deleteBtn = document.createElement("button")
         const habitGoal = document.createElement("h3")
 
+        // classes
+        HabitLeftDiv.classList.add("HabitLeftDiv")
+        HabitRightDiv.classList.add("HabitRightDiv")
+        HabitLeftUpperDiv.classList.add("HabitLeftUpperDiv")
+        HabitLeftLowerDiv.classList.add("HabitLeftLowerDiv")
+        ProgressBtn.classList.add("ProgressBtn")
+        deleteBtn.classList.add("deleteBtn")
+        ProgressBtn.classList.add("ProgressBtn")
         // circuluar progress bar
         const progressBarDiv = document.createElement("div")
         const outer = document.createElement("div")
@@ -178,18 +195,27 @@ async function renderFeed() {
         let progress = habitData.Progress  
         
         // console.log(`(${(progress/frequency)*360})`)
-        // outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
-        outer.style.background =  `conic-gradient(#000000 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
+        outer.style.background =  `conic-gradient(#4d5bf9 ${(progress/frequency)*360}deg, #cadcff ${(progress/frequency)*360}deg)` 
+        if(progress/frequency >= 1) {
+            outer.style.background = "rgb(75, 214, 41)";
+        }
 
         HabitDiv.classList.add("habit-div")
         ProgressBtn.setAttribute("id", id)
         deleteBtn.setAttribute("id", id)
         inner.setAttribute("id", "inner")
+
+        if(habitData.Streak == 0) {
+            HabitStreak.textContent = "Complete your habit to start a streak!"
+        } else {
+            HabitStreak.textContent = habitData.Streak + " 🔥"
+        }
       
         name.textContent = habitData.HabitName
-        HabitStreak.textContent = habitData.Streak
         ProgressBtn.textContent = "+"
         deleteBtn.textContent = "x"
+
+        
       
         // habit tracking goal 
         if(habitData.Frequency - habitData.Progress > 0) {
@@ -203,13 +229,17 @@ async function renderFeed() {
             inner.textContent = `100%`
         }
             
-        HabitDiv.appendChild(name)
-        HabitDiv.appendChild(habitGoal)
-        HabitDiv.appendChild(HabitStreak)
-        HabitDiv.appendChild(ProgressBtn)
-        HabitDiv.appendChild(deleteBtn)
-        HabitDiv.appendChild(progressBarDiv)
+        HabitDiv.appendChild(HabitLeftDiv)
+        HabitDiv.appendChild(HabitRightDiv)
+        HabitLeftDiv.appendChild(HabitLeftUpperDiv)
+        HabitLeftDiv.appendChild(HabitLeftLowerDiv)
+        HabitLeftUpperDiv.appendChild(name)
+        HabitLeftUpperDiv.appendChild(HabitStreak)
+        HabitLeftLowerDiv.appendChild(habitGoal)
+        HabitRightDiv.appendChild(deleteBtn)
+        HabitRightDiv.appendChild(progressBarDiv)
         progressBarDiv.appendChild(outer)
+        outer.appendChild(ProgressBtn)
         outer.appendChild(inner)
         feed.appendChild(HabitDiv)
 
@@ -233,6 +263,7 @@ async function showAddHabitForm() {
     const div = document.querySelector(".addHabitDiv")
     div.classList.toggle("moveHabitDiv")
 }
+
 
 function renderProfile() {
     const profile = document.createElement('section');

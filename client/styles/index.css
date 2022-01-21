@@ -1,37 +1,46 @@
 
 .addHabitBtn {
-    
+
 }
 
 .addHabitDiv {
-    background: none;
-    display: flex;
+    background: #CF5E74;
+    display: block;
+    margin: auto;
+    justify-self: center;
     justify-content: center;
     margin-top: 100px;
+    width: 60%;
+    border-radius: 5px;
+    box-shadow: 5px 5px rgba(31, 27, 27, 0.2);
     /* border-bottom: 1px solid black; */
     transform: translateY(-100vh);
-    z-index: -10;
+    transition: 1s ease-in-out;
 }
 
 .moveHabitDiv {
     transform: translateY(0vh);
-    z-index:1;
+    z-index:100;
+    position: relative;
 }
 
 .progressBarDiv {
     width: 160px;
     height: 160px;
     position: relative;
+    box-sizing: none;
+    margin-right: 20px;
+
 }
 
 .outer{
-    height: 80%;
-    width: 80%;
+    box-sizing: none;
+    height: 65%;
+    width: 65%;
     border-radius: 50%;
-    
+    display: flex;
+    flex-direction: column;
     padding: 20px;
-    box-shadow:  6px 6px 10px -1px rgba(0,0,0,0.15),
-                -6px -6px 10px -1px rgba(255,255,255,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,13 +49,64 @@
 .outer:before {
     content: "";
     position: absolute;
-    height: 84%;
-    width: 84%;
+    height: 70%;
+    width: 70%;
     background-color: white;
     border-radius: 50%;
+    box-sizing: none;
 }
 
 #inner {
     color: black;
-    z-index: 1
+    z-index: 1;
+    box-sizing: none;
+}
+
+/* habit div */
+
+.HabitLeftDiv {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.HabitRightDiv {
+    width: 19%;
+}
+
+.ProgressBtn {
+    z-index: 2;
+}
+
+.HabitLeftUpperDiv {
+    display: flex;
+    justify-content: space-around;
+}
+
+.deleteBtn {
+    margin-right: -200px;
+    margin-top: -250px;
+    border-radius: 50%;
+    color: white;
+    background-color: red;
+    font-weight: 800;
+    text-align: center;
+    font-size: 15px;
+    text-justify: center;
+}
+
+.deleteBtn:hover {
+    cursor: pointer;
+    transform: translateY(1px)
+}
+
+.ProgressBtn {
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 45px;
+}
+
+.ProgressBtn:hover {
+    cursor: pointer;
 }
