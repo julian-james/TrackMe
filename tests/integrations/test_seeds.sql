@@ -1,6 +1,6 @@
 TRUNCATE user_table, habit, habit_counter  RESTART IDENTITY;
 
-INSERT INTO user_table(username, email, usr_password)
+INSERT INTO user_table(name, email, password)
     VALUES
         ('test', 'test1@gmail.com', '$2a$10$bSQ6V2lYWaTS.KH3K81De.Yvaf2RoNcZcU3BcsZqsdVirBvs.EkzS'),
         ('test2', 'test2@hotmail.com', ''),
@@ -29,17 +29,4 @@ INSERT INTO habit_counter(habit_id, time_done, completedStreak)
         (1, current_timestamp - INTERVAL '2 day', FALSE),
         --Task 2 completed 1x today
         (2, current_timestamp, FALSE),
-        (2, current_timestamp, FALSE),
-        --Task 2 completed 4x yesterday
-        (2, current_timestamp - INTERVAL '1 day', FALSE),
-        (2, current_timestamp - INTERVAL '1 day', FALSE),
-        (2, current_timestamp - INTERVAL '1 day', FALSE),
-        (2, current_timestamp - INTERVAL '1 day', TRUE),
-        --Task 2 completed 3x times the day before
-        (2, current_timestamp - INTERVAL '2 day', FALSE),
-        (2, current_timestamp - INTERVAL '2 day', FALSE),
-        (2, current_timestamp - INTERVAL '2 day', FALSE),
-        --Task 2 completed 1x 
-        (2, current_timestamp - INTERVAL '3 day', FALSE),
-        --completed task 3 1x
-        (3, current_timestamp - INTERVAL '1 day', TRUE);
+        (2, current_timestamp, FALSE);
